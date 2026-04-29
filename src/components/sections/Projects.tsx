@@ -125,7 +125,8 @@ function ProjectCard({ project, index, large = false }: {
     const ref = useRef<HTMLDivElement>(null)
     const inV = useInView(ref, { once: true, margin: '-60px' })
     const [hovered, setHovered] = useState(false)
-    const hasImage: boolean | null = project?.image_path && project.image_path.trim() !== ""
+    const hasImage: boolean | null =  project?.image_path?.trim() !== "";
+    //project?.image_path && project?.image_path.trim() !== ""
     const cardV: Variants = {
         hidden: { opacity: 0, y: 48, scale: 0.96 },
         visible: {
@@ -158,7 +159,7 @@ function ProjectCard({ project, index, large = false }: {
                     <div className="relative overflow-hidden shrink-0">
                         {hasImage ? (
                             <img
-                                src={project?.image_path ? project?.image_path : ''}
+                                src={project?.image_path ?? ''}
                                 alt={project.title}
                                 className="w-full h-full object-cover"
                             />
