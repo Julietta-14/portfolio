@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
     bio: 'Experienced UI Architect and Front-End Developer focused on building scalable, accessible, and optimized interfaces. Skilled in design systems, component architecture, and optimizing UI/UX for better experiences.',
     email: 'julietta.stanislaus@outlook.com',
     linkedin: 'linkedin.com/in/julietta-stanislaus/',
-    github: 'https://github.com/ui-architect',
+    github: 'https://github.com/Julietta-14',
     availability: 'Available for Architecture',
 } as const
 
