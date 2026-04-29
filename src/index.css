@@ -1,0 +1,412 @@
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN TOKENS — Dark Theme (Default)
+   ============================================ */
+:root {
+  /* Surfaces */
+  --color-bg-base:               #0A0A0B;
+  --color-surface:               #15121b;
+  --color-surface-dim:           #15121b;
+  --color-surface-low:           #1d1a23;
+  --color-surface-container:     #211e27;
+  --color-surface-high:          #2c2832;
+  --color-surface-highest:       #37333d;
+  --color-surface-bright:        #3b3742;
+
+  /* Text */
+  --color-text-primary:          #F8F9FA;
+  --color-text-secondary:        #cbc3d7;
+  --color-text-muted:            #94A3B8;
+
+  /* Accents */
+  --color-accent-violet:         #8B5CF6;
+  --color-accent-violet-dim:     #6d3bd7;
+  --color-accent-cyan:           #06B6D4;
+  --color-primary:               #d0bcff;
+  --color-primary-container:     #a078ff;
+  --color-on-primary:            #3c0091;
+  --color-secondary:             #4cd7f6;
+  --color-tertiary:              #ffb869;
+
+  /* Borders */
+  --color-outline:               #958ea0;
+  --color-outline-variant:       #494454;
+  --color-border-slate:          #334155;
+
+  /* Semantic */
+  --color-error:                 #ffb4ab;
+
+  /* Radii */
+  --radius-sm:   0.25rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1.5rem;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --gutter:           24px;
+  --margin-mobile:    16px;
+  --margin-desktop:   64px;
+  --container-max:    1440px;
+
+  /* Motion */
+  --duration-fast:    150ms;
+  --duration-base:    300ms;
+  --duration-slow:    600ms;
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:      cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================
+   LIGHT THEME OVERRIDES
+   ============================================ */
+[data-theme="light"] {
+  --color-bg-base:               #F8F9FA;
+  --color-surface:               #FFFFFF;
+  --color-surface-dim:           #F1F0F7;
+  --color-surface-low:           #ECEAF4;
+  --color-surface-container:     #E6E4F0;
+  --color-surface-high:          #DDDAE8;
+  --color-surface-highest:       #D4D1E0;
+  --color-surface-bright:        #FFFFFF;
+
+  --color-text-primary:          #0A0A0B;
+  --color-text-secondary:        #3D3850;
+  --color-text-muted:            #64748B;
+
+  --color-accent-violet:         #6d3bd7;
+  --color-accent-violet-dim:     #5516be;
+  --color-accent-cyan:           #0891B2;
+  --color-primary:               #5516be;
+  --color-primary-container:     #6d3bd7;
+  --color-on-primary:            #FFFFFF;
+  --color-secondary:             #0891B2;
+  --color-tertiary:              #B45309;
+
+  --color-outline:               #A094B0;
+  --color-outline-variant:       #C9C4D4;
+  --color-border-slate:          #CBD5E1;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  transition: background-color var(--duration-base) var(--ease-out-expo),
+              color var(--duration-base) var(--ease-out-expo);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-violet);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+::selection {
+  background: var(--color-accent-violet);
+  color: #fff;
+}
+
+/* ============================================
+   FOCUS VISIBLE
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--color-accent-violet);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   GLASS UTILITY
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   AMBIENT GLOW UTILITY
+   ============================================ */
+.glow-violet {
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+}
+.glow-cyan {
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.3);
+}
+
+/* ============================================
+   GRADIENT TEXT UTILITY
+   ============================================ */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   ANIMATION KEYFRAMES
+   ============================================ */
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(32px) skewY(0.5deg); }
+  to   { opacity: 1; transform: translateY(0)    skewY(0); }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  38%       { transform: translateY(-22px) rotate(1.2deg); }
+  72%       { transform: translateY(-10px) rotate(-0.8deg); }
+}
+
+@keyframes pulseRingExpand {
+  0%   { transform: scale(1);   opacity: 0.75; }
+  100% { transform: scale(2.8); opacity: 0;    }
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0);  opacity: 0.85; }
+  50%       { transform: translateY(7px); opacity: 0.28; }
+}
+
+@keyframes scanLine {
+  0%   { top: -15%; opacity: 0.5; }
+  60%  { opacity: 0.07; }
+  100% { top: 115%;  opacity: 0;   }
+}
+
+@keyframes borderPulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(139, 92, 246, 0.45); }
+  50%       { box-shadow: 0 0 0 7px rgba(139, 92, 246, 0);    }
+}
+
+@keyframes underlineGrow {
+  from { width: 0; opacity: 0; }
+  to   { width: 96px; opacity: 1; }
+}
+
+/* ============================================
+   ANIMATION UTILITY CLASSES
+   ============================================ */
+
+/* Staggered entrance — set animationDelay inline */
+.anim-fade-up {
+  opacity: 0;
+  animation: heroFadeUp 0.82s var(--ease-out-expo) forwards;
+}
+
+.anim-fade-in {
+  opacity: 0;
+  animation: heroFadeIn 0.72s ease forwards;
+}
+
+/* Continuous loops */
+.anim-float      { animation: floatGentle 7s  ease-in-out infinite; }
+.anim-float-slow { animation: floatGentle 11s ease-in-out infinite; }
+.anim-pulse-ring { animation: pulseRingExpand 1.9s ease-out infinite; }
+.anim-scroll-bounce { animation: scrollBounce 2s ease-in-out infinite; }
+.anim-border-pulse  { animation: borderPulse  2.4s ease-in-out infinite; }
+
+/* Animated gradient text — combine with .gradient-text */
+.anim-gradient-text {
+  background-size: 240% 240%;
+  animation: gradientShift 5s ease infinite;
+}
+
+/* Underline grow-in */
+.anim-underline-grow {
+  width: 0;
+  animation: underlineGrow 0.7s var(--ease-out-expo) forwards;
+}
+
+/* ============================================
+   HOVER EFFECTS — Reusable Utilities
+   Apply these classes anywhere for consistent animated interactions.
+   ============================================ */
+
+/* 1. hover-glow-violet — Primary CTA buttons (vibrant violet glow + lift) */
+.hover-glow-violet {
+  transition:
+    background  var(--duration-base) var(--ease-out-expo),
+    box-shadow  var(--duration-base) var(--ease-out-expo),
+    transform   var(--duration-fast) var(--ease-spring),
+    color       var(--duration-fast) var(--ease-out-expo) !important;
+}
+.hover-glow-violet:hover {
+  background: var(--color-accent-violet) !important;
+  box-shadow:
+    0 0 20px rgba(139, 92, 246, 0.65),
+    0 0 48px rgba(139, 92, 246, 0.28),
+    0 4px 16px rgba(0, 0, 0, 0.25) !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  color: #fff !important;
+}
+.hover-glow-violet:active {
+  transform: translateY(0) scale(0.97) !important;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.45) !important;
+}
+
+/* 2. hover-pill — Nav links / ghost buttons (pill bg + lift) */
+.hover-pill {
+  transition:
+    color       var(--duration-fast) var(--ease-out-expo),
+    background  var(--duration-fast) var(--ease-out-expo),
+    transform   var(--duration-fast) var(--ease-spring) !important;
+}
+.hover-pill:hover {
+  color:      var(--color-text-primary) !important;
+  background: rgba(139, 92, 246, 0.12) !important;
+  transform:  translateY(-1px) !important;
+}
+.hover-pill:active {
+  transform: scale(0.96) !important;
+}
+
+/* 3. hover-ring — Icon / toggle buttons (glowing ring + scale) */
+.hover-ring {
+  transition:
+    box-shadow var(--duration-base) var(--ease-out-expo),
+    background var(--duration-fast) var(--ease-out-expo),
+    transform  var(--duration-fast) var(--ease-spring) !important;
+}
+.hover-ring:hover {
+  box-shadow:
+    0 0 0 2px rgba(139, 92, 246, 0.65),
+    0 0 20px rgba(139, 92, 246, 0.38) !important;
+  background: rgba(139, 92, 246, 0.16) !important;
+  transform:  scale(1.1) !important;
+}
+.hover-ring:active {
+  transform: scale(0.93) !important;
+}
+
+/* 4. hover-shimmer — Shine sweep (combine with other hover classes) */
+.hover-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.hover-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.55s var(--ease-out-expo);
+  pointer-events: none;
+  border-radius: inherit;
+}
+.hover-shimmer:hover::after {
+  transform: translateX(120%);
+}
+
+/* 5. hover-card — Cards / panels (lift + depth shadow) */
+.hover-card {
+  transition:
+    transform  var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-base) var(--ease-out-expo) !important;
+}
+.hover-card:hover {
+  transform:  translateY(-6px) scale(1.015) !important;
+  box-shadow:
+    0 24px 52px rgba(139, 92, 246, 0.22),
+    0 6px 18px rgba(0, 0, 0, 0.32) !important;
+}
+.hover-card:active {
+  transform: translateY(-2px) scale(0.99) !important;
+}
+
+/* ============================================
+   NOISE TEXTURE OVERLAY
+   ============================================ */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ============================================
+   LIGHT THEME COMPONENT OVERRIDES
+   ============================================ */
+[data-theme="light"] .glass {
+  background:   rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 0, 0, 0.07);
+  box-shadow:   0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] body {
+  background-color: var(--color-bg-base);
+}
+
+/* Input fields in light mode */
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+  color-scheme: light;
+}
+
+/* Placeholder color fix */
+[data-theme="light"] ::placeholder {
+  color: #94A3B8;
+}
+
+/* Noise overlay lighter in light mode */
+[data-theme="light"] .noise::after {
+  opacity: 0.15;
+}
+
+/* Scrollbar light */
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #F8F9FA;
+}
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: var(--color-accent-violet);
+}
