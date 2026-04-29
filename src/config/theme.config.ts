@@ -45,7 +45,7 @@ export const PROJECTS = [
         url: '#',
         cta: 'Project Details',
         size: 'small',
-        image_path: null
+        image_path: ''
     },
     {
         id: 'corporate-web',
@@ -55,7 +55,7 @@ export const PROJECTS = [
         url: '#',
         cta: 'Explore Work',
         size: 'small',
-        image_path: null
+        image_path: ''
     }
 ] as const
 
