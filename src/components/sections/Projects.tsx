@@ -159,7 +159,7 @@ function ProjectCard({ project, index, large = false }: {
                     <div className="relative overflow-hidden shrink-0">
                         {hasImage ? (
                             <img
-                                src={project?.image_path ?? ''}
+                                src={project?.image_path}
                                 alt={project.title}
                                 className="w-full h-full object-cover"
                             />
