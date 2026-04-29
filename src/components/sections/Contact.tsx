@@ -560,7 +560,7 @@ export default function Contact() {
                                 </p>
                             </div>
                             <a
-                                href="/Resume-JuliettaStanislaus.pdf"
+                                href="/portfolio/Resume-JuliettaStanislaus.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-xs font-bold mt-3 inline-flex items-center gap-1.5 hover:underline"
