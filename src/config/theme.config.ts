@@ -35,7 +35,7 @@ export const PROJECTS = [
         url: 'https://julietta-monolith.netlify.app/',
         cta: 'Explore the site',
         size: 'large',
-        image_path: ''
+        image_path: '/portfolio/monolith_banner.png'
     },
     {
         id: 'wordpress-platforms',
@@ -152,17 +152,23 @@ export const PERFORMANCE_STATS = [
     { value: '100', label: 'Lighthouse' },
 ] as const
 
+export const EXPERIENCE_STATS = [
+    { value: "10+", label: "Projects Built" },
+    { value: "5+", label: "Production Apps" },
+    { value: "UI/UX", label: "Design Focus" },
+]
+
 export const EXTRA_SKILLS = [
-  'Design Systems',
-  'WCAG 2.1',
-  'Agile Workflow',
-  'Code Review',
-  'UI Optimization',
-  'Figma-to-Code',
-  'Responsive Design',
-  'Mobile-First',
-  'WordPress',
-  'Elementor',
-  'Core Web Vitals',
-  'Component Architecture',
+    'Design Systems',
+    'WCAG 2.1',
+    'Agile Workflow',
+    'Code Review',
+    'UI Optimization',
+    'Figma-to-Code',
+    'Responsive Design',
+    'Mobile-First',
+    'WordPress',
+    'Elementor',
+    'Core Web Vitals',
+    'Component Architecture',
 ] as const

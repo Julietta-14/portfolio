@@ -5,9 +5,9 @@ import { MoonStar, Sun } from 'lucide-react'
 
 export default function Navbar() {
   const { toggleTheme, isDark } = useTheme()
-  const [scrolled,     setScrolled]     = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('')
-  const [menuOpen,     setMenuOpen]     = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
   // Shrink navbar on scroll
@@ -27,7 +27,10 @@ export default function Navbar() {
       if (!el) return
       const obs = new IntersectionObserver(
         ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
-        { threshold: 0.3 }
+        {
+          threshold: 0,
+          rootMargin: '-40% 0px -55% 0px'
+        }
       )
       obs.observe(el)
       observers.push(obs)
@@ -68,7 +71,7 @@ export default function Navbar() {
           className="glass w-full max-w-6xl flex items-center justify-between px-6 transition-all duration-500"
           style={{
             borderRadius: scrolled ? '0.75rem' : '1rem',
-            paddingTop:    scrolled ? '10px' : '14px',
+            paddingTop: scrolled ? '10px' : '14px',
             paddingBottom: scrolled ? '10px' : '14px',
             boxShadow: scrolled
               ? '0 8px 32px rgba(139,92,246,0.15)'
@@ -148,7 +151,7 @@ export default function Navbar() {
               style={{
                 fontFamily: 'Plus Jakarta Sans',
                 background: 'var(--color-primary-container)',
-                color:      'var(--color-on-primary)',
+                color: 'var(--color-on-primary)',
               }}
             >
               Contact
@@ -196,9 +199,9 @@ export default function Navbar() {
       <div
         className="fixed inset-0 z-40 md:hidden transition-all duration-500"
         style={{
-          opacity:        menuOpen ? 1 : 0,
-          pointerEvents:  menuOpen ? 'auto' : 'none',
-          background:     'rgba(10,10,11,0.85)',
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? 'auto' : 'none',
+          background: 'rgba(10,10,11,0.85)',
           backdropFilter: 'blur(16px)',
         }}
         aria-hidden={!menuOpen}
@@ -209,12 +212,12 @@ export default function Navbar() {
           style={{
             background: 'var(--color-surface-container)',
             border: '1px solid rgba(255,255,255,0.08)',
-            transform:  menuOpen ? 'translateY(0) scale(1)' : 'translateY(-16px) scale(0.97)',
+            transform: menuOpen ? 'translateY(0) scale(1)' : 'translateY(-16px) scale(0.97)',
             transition: 'transform 400ms var(--ease-out-expo)',
           }}
         >
           {NAV_LINKS.map((link, i) => {
-            const id       = link.href.replace('#', '')
+            const id = link.href.replace('#', '')
             const isActive = activeSection === id
             return (
               <button
@@ -222,9 +225,9 @@ export default function Navbar() {
                 onClick={() => handleNavClick(link.href)}
                 className="w-full text-left px-4 py-4 rounded-xl font-bold text-lg transition-all duration-200 flex items-center justify-between"
                 style={{
-                  fontFamily:  'Plus Jakarta Sans',
-                  color:       isActive ? 'var(--color-accent-violet)' : 'var(--color-text-primary)',
-                  background:  isActive ? 'rgba(139,92,246,0.1)' : 'transparent',
+                  fontFamily: 'Plus Jakarta Sans',
+                  color: isActive ? 'var(--color-accent-violet)' : 'var(--color-text-primary)',
+                  background: isActive ? 'rgba(139,92,246,0.1)' : 'transparent',
                   transitionDelay: `${i * 40}ms`,
                 }}
               >
@@ -243,7 +246,7 @@ export default function Navbar() {
               style={{
                 fontFamily: 'Plus Jakarta Sans',
                 background: 'var(--color-primary-container)',
-                color:      'var(--color-on-primary)',
+                color: 'var(--color-on-primary)',
               }}
             >
               Contact

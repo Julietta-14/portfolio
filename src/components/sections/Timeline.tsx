@@ -572,7 +572,7 @@ export default function Timeline() {
     <section
       id="timeline"
       ref={sectionRef}
-      className="relative py-24 md:py-34 overflow-hidden"
+      className="relative py-14 md:py-20 overflow-hidden"
       aria-label="Career timeline"
     >
       {/* ── Parallax background ── */}

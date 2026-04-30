@@ -161,7 +161,7 @@ function ProjectCard({ project, index, large = false }: {
                             <img
                                 src={project?.image_path}
                                 alt={project.title}
-                                className="w-full h-full object-cover"
+                                className="w-full max-w-full object-cover"
                             />
                         ) : (
                             <BrowserPlaceholder index={index} title={project.title} tall={large} />

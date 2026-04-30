@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, type Variants } from 'framer-motion'
-import { PERFORMANCE_STATS } from '@/config/theme.config'
-import { Gauge, ScanEye } from 'lucide-react'
+import { EXPERIENCE_STATS } from '@/config/theme.config'
+import { Code, ScanEye } from 'lucide-react'
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 const SPRING = { type: 'spring' as const, stiffness: 140, damping: 22, mass: 0.8 }
@@ -32,7 +32,7 @@ export default function StatsSection() {
             <div className="absolute inset-0 -z-10 pointer-events-none"
                 style={{ background: 'radial-gradient(ellipse 60% 50% at 30% 60%, rgba(139,92,246,0.08), transparent)' }} />
 
-            <div className="max-w-6xl mx-auto px-4">
+            <div className="max-w-6xl mx-auto px-4 pb-40">
                 <motion.div
                     className="grid grid-cols-1 md:grid-cols-3 gap-6"
                     variants={containerV}
@@ -44,13 +44,15 @@ export default function StatsSection() {
                         variants={itemV}
                         className="md:col-span-2 relative rounded-3xl p-10 md:p-12 flex flex-col justify-between overflow-hidden"
                         style={{
-                            background: 'var(--color-surface-container)',
+                            background: 'linear-gradient(135deg, color- mix(in srgb, var(--color-surface-container) 85%, transparent), color-mix(in srgb, var(--color-surface-high) 65%, transparent))',
                             border: '1px solid var(--color-outline-variant)',
-                            boxShadow: '0 24px 64px rgba(0,0,0,0.18)',
+                            boxShadow: '0 24px 64px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(139,92,246,0.08), inset 0 0 40px rgba(6,182,212,0.05)',
+                            backdropFilter: 'blur(18px) saturate(140%)',
+                            WebkitBackdropFilter: 'blur(18px) saturate(140%)',
                         }}
                         animate={{
                             boxShadow: leftHovered
-                                ? '0 0 0 1px rgba(139,92,246,0.35), 0 32px 80px rgba(139,92,246,0.22), 0 0 60px rgba(6,182,212,0.1) inset'
+                                ? '0 0 0 1px var(--color-accent-violet), 0 32px 80px rgba(139,92,246,0.22), 0 0 60px rgba(6,182,212,0.1) inset'
                                 : '0 24px 64px rgba(0,0,0,0.18)',
                         }}
                         transition={SPRING}
@@ -64,13 +66,33 @@ export default function StatsSection() {
                             transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
                         />
 
+                        <motion.div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                                background: `
+                                radial-gradient(circle at 20% 30%, rgba(139,92,246,0.18), transparent 40%),
+                                radial-gradient(circle at 80% 60%, rgba(6,182,212,0.14), transparent 45%)`,
+                                filter: 'blur(50px)',
+                                mixBlendMode: 'screen',
+                            }}
+                            animate={{
+                                x: [0, 10, -10, 0],
+                                y: [0, -8, 8, 0],
+                            }}
+                            transition={{
+                                duration: 10,
+                                repeat: Infinity,
+                                ease: 'easeInOut',
+                            }}
+                        />
+
                         {/* Speedometer watermark */}
                         <motion.div
                             className="absolute top-6 right-6 md:right-10 select-none pointer-events-none"
                             animate={{ rotate: [0, 4, -4, 0] }}
                             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
                         >
-                            <Gauge
+                            <Code
                                 size={160}
                                 style={{
                                     color: leftHovered ? 'var(--color-accent-violet)' : 'var(--color-text-primary)',
@@ -81,25 +103,40 @@ export default function StatsSection() {
                             />
                         </motion.div>
 
+
                         {/* Text */}
                         <div className="relative z-10 space-y-4">
-                            <h3 className="font-black leading-tight"
+                            <motion.h3
+                                className="font-black leading-tight"
                                 style={{
-                                    fontFamily: 'Plus Jakarta Sans', fontSize: 'clamp(1.75rem,4vw,2.75rem)',
-                                    color: 'var(--color-text-primary)'
-                                }}>
-                                Optimized to the <br />
-                                <span style={{ color: 'var(--color-accent-cyan)' }}>Last Millisecond.</span>
-                            </h3>
-                            <p className="text-base max-w-sm leading-relaxed"
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    fontSize: 'clamp(1.75rem,4vw,2.75rem)',
+                                    color: 'var(--color-text-primary)',
+                                }}
+                            >
+                                I Build <br />
+
+                                <motion.span
+                                    key={leftHovered ? "a" : "b"}
+                                    initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+                                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                    transition={{ duration: 0.6, ease: EASE }}
+                                    style={{ color: 'var(--color-accent-cyan)', display: 'inline-block' }}
+                                >
+                                    {leftHovered
+                                        ? "Scalable Digital Systems."
+                                        : "Clean & Fluid Interfaces."}
+                                </motion.span>
+                            </motion.h3>
+                            <p className="text-base leading-relaxed"
                                 style={{ fontFamily: 'Inter', color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
-                                My builds consistently score 95+ on Core Web Vitals. Performance isn't an afterthought; it's the foundation.
+                                I'm a frontend-focused developer who builds fast, responsive and production-ready web applications. I focus on clean UI, performance, and scalable architecture that works in real-world systems.
                             </p>
                         </div>
 
                         {/* Stats row */}
-                        <div className="relative z-10 flex gap-8 flex-wrap mt-10">
-                            {PERFORMANCE_STATS.map(({ value, label }, i) => (
+                        <div className="relative z-10 flex gap-8 flex-wrap mt-8">
+                            {EXPERIENCE_STATS.map(({ value, label }, i) => (
                                 <motion.div key={label}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -116,6 +153,54 @@ export default function StatsSection() {
                                 </motion.div>
                             ))}
                         </div>
+
+                        <motion.div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                                background:
+                                    'linear-gradient(120deg, transparent 40%, color-mix(in srgb, var(--color-text-primary) 10%, transparent), transparent 60%)',
+                            }}
+                            animate={{
+                                x: ['-120%', '120%'],
+                            }}
+                            transition={{
+                                duration: 5,
+                                repeat: Infinity,
+                                ease: "linear",
+                            }}
+                        />
+
+                        <motion.div
+                            className="absolute bottom-6 left-6 w-240px select-none pointer-events-none"
+                            animate={{
+                                y: [0, -10, 0],
+                                x: [0, 4, -4, 0],
+                                rotate: [-0.6, 0.6, -0.6],
+                            }}
+                            transition={{
+                                duration: 10,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
+                            style={{
+                                opacity: leftHovered ? 0.35 : 0.12,
+                                filter: leftHovered
+                                    ? "drop-shadow(0 0 20px rgba(6,182,212,0.5))"
+                                    : "none",
+                            }}
+                        >
+                            <pre className="text-[10px] leading-snug text-(--color-text-primary) opacity-70">
+                                {`
+                                <div class="ui-flow">
+                                    <motion.div
+                                        animate={{ y: [0, -6, 0] }}
+                                        transition={{ duration: 4, repeat: Infinity }}
+                                    >
+                                        Build → Optimize → Deploy
+                                    </motion.div>
+                                </div>`}
+                            </pre>
+                        </motion.div>
                     </motion.div>
 
                     {/* ── Right: Accessibility card ── */}
@@ -124,16 +209,30 @@ export default function StatsSection() {
                         className="relative rounded-3xl p-10 md:p-12 flex flex-col justify-between overflow-hidden"
                         style={{
                             background: 'var(--color-accent-violet)',
-                            boxShadow: '0 24px 64px rgba(139,92,246,0.35)',
+                            boxShadow: '0 24px 64px var(--color-accent-violet)',
                         }}
                         whileHover={{ scale: 1.02, boxShadow: '0 32px 80px rgba(139,92,246,0.5)' }}
                         transition={SPRING}
                     >
                         {/* Shimmer */}
-                        <motion.div className="absolute inset-0 pointer-events-none"
-                            style={{ background: 'linear-gradient(105deg,transparent 35%,rgba(255,255,255,0.1) 50%,transparent 65%)' }}
-                            animate={{ x: ['-120%', '220%'] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: 'linear', repeatDelay: 2.5 }}
+                        <motion.div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                                background: `
+                                radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--color-accent-cyan) 25%, transparent), transparent 45%),
+                                radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--color-accent-violet) 25%, transparent), transparent 45%)`,
+                                filter: 'blur(30px)',
+                                mixBlendMode: 'screen',
+                            }}
+                            animate={{
+                                x: [0, 20, -20, 0],
+                                y: [0, -15, 15, 0],
+                            }}
+                            transition={{
+                                duration: 10,
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                            }}
                         />
                         {/* Soft top-left glow */}
                         <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full pointer-events-none"
@@ -184,7 +283,7 @@ export default function StatsSection() {
                     </motion.div>
                 </motion.div>
             </div>
-        </section>
+        </section >
     )
 }
 

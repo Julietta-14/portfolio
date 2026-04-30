@@ -129,7 +129,7 @@ function ScrollToTop() {
             {visible && (
                 <motion.button
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    className="fixed bottom-8 right-6 z-50 w-11 h-11 rounded-xl flex items-center justify-center"
+                    className="fixed bottom-8 right-6 z-50 w-11 h-11 rounded-xl flex items-center justify-center cursor-pointer"
                     style={{
                         background: hovered
                             ? 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))'
