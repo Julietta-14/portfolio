@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { THEME_CONFIG } from '@/config/theme.config'
 
 type Theme = 'dark' | 'light'
 
@@ -14,17 +13,33 @@ const ThemeContext = createContext<ThemeContextValue | null>(null)
 export function ThemeProvider({ children }: { children: ReactNode }) {
     const [theme, setTheme] = useState<Theme>(() => {
         const stored = localStorage.getItem('portfolio-theme') as Theme | null
-        return stored ?? THEME_CONFIG.defaultTheme
+        if (stored) return stored
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     })
 
     useEffect(() => {
-        const root = document.documentElement
-        root.setAttribute('data-theme', theme)
-        localStorage.setItem('portfolio-theme', theme)
+        document.documentElement.setAttribute('data-theme', theme)
     }, [theme])
 
-    const toggleTheme = () =>
-        setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+        const handleChange = (e: MediaQueryListEvent) => {
+            // Only follow system preference if the user hasn't manually chosen a theme
+            if (!localStorage.getItem('portfolio-theme')) {
+                setTheme(e.matches ? 'dark' : 'light')
+            }
+        }
+        mediaQuery.addEventListener('change', handleChange)
+        return () => mediaQuery.removeEventListener('change', handleChange)
+    }, [])
+
+    const toggleTheme = () => {
+        setTheme(prev => {
+            const next = prev === 'dark' ? 'light' : 'dark'
+            localStorage.setItem('portfolio-theme', next)
+            return next
+        })
+    }
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme, isDark: theme === 'dark' }}>
