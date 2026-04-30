@@ -338,7 +338,7 @@ export default function Hero() {
                         {/* Stats row */}
                         <div style={reveal(520)} className="flex flex-wrap gap-3 pt-2">
                             <StatCard value={7} suffix="+" label="Years Exp" color="var(--color-accent-violet)" started={started} />
-                            <StatCard value={80} suffix="+" label="Projects" color="var(--color-accent-cyan)" started={started} />
+                            <StatCard value={150} suffix="+" label="Projects" color="var(--color-accent-cyan)" started={started} />
                         </div>
                     </div>
 

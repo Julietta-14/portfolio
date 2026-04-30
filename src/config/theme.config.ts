@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
     tagline: 'Designing scalable, pixel-perfect interfaces with a strong focus on precision, consistency, and maintainable implementation',
     bio: 'Experienced UI Architect and Front-End Developer focused on building scalable, accessible, and optimized interfaces. Skilled in design systems, component architecture, and optimizing UI/UX for better experiences.',
     email: 'julietta.stanislaus@outlook.com',
-    linkedin: 'linkedin.com/in/julietta-stanislaus/',
+    linkedin: 'https://linkedin.com/in/julietta-stanislaus/',
     github: 'https://github.com/Julietta-14',
     availability: 'Available for Architecture',
 } as const
@@ -153,9 +153,9 @@ export const PERFORMANCE_STATS = [
 ] as const
 
 export const EXPERIENCE_STATS = [
-    { value: "10+", label: "Projects Built" },
-    { value: "5+", label: "Production Apps" },
+    { value: "150+", label: "Projects Built" },
     { value: "UI/UX", label: "Design Focus" },
+    { value: "Frontend Dev", label: "Experienced" }
 ]
 
 export const EXTRA_SKILLS = [

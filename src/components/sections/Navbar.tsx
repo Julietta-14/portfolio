@@ -39,13 +39,36 @@ export default function Navbar() {
   }, [])
 
   // Close menu on outside click
-  useEffect(() => {
+  /* useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node))
         setMenuOpen(false)
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
+  }, []) */
+
+  useEffect(() => {
+    const handler = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node
+
+      // ignore clicks inside menu
+      if (menuRef.current?.contains(target)) return
+
+      // ignore clicks on hamburger button itself (IMPORTANT)
+      const hamburger = document.querySelector('[aria-label="Open menu"], [aria-label="Close menu"]')
+      if (hamburger?.contains(target)) return
+
+      setMenuOpen(false)
+    }
+
+    document.addEventListener('mousedown', handler)
+    document.addEventListener('touchstart', handler)
+
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('touchstart', handler)
+    }
   }, [])
 
   // Lock body scroll when menu open
@@ -122,7 +145,7 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Right side: Theme toggle + Contact CTA */}
+          {/* Right side: Theme toggle + Resume CTA */}
           <div className="flex items-center gap-3">
             {/* Theme Toggle */}
             <button
@@ -144,22 +167,22 @@ export default function Navbar() {
               </span>
             </button>
 
-            {/* Contact CTA — desktop */}
+            {/* Resume CTA — desktop */}
             <button
-              onClick={() => handleNavClick('#contact')}
-              className="hidden md:flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-bold hover-glow-violet hover-shimmer"
+              onClick={() => window.open('/portfolio/Resume-JuliettaStanislaus.pdf', '_blank')}
+              className="hidden md:flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-bold hover-glow-violet hover-shimmer cursor-pointer"
               style={{
                 fontFamily: 'Plus Jakarta Sans',
                 background: 'var(--color-primary-container)',
                 color: 'var(--color-on-primary)',
               }}
             >
-              Contact
+              View Resume
             </button>
 
             {/* Hamburger — mobile */}
             <button
-              onClick={() => setMenuOpen(prev => !prev)}
+              onClick={(e) => { setMenuOpen(!menuOpen); e.stopPropagation(); e.preventDefault(); }}
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               className="md:hidden w-10 h-10 rounded-lg flex flex-col items-center justify-center gap-1.25 transition-all duration-200"
@@ -241,15 +264,15 @@ export default function Navbar() {
 
           <div className="pt-4 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
             <button
-              onClick={() => handleNavClick('#contact')}
-              className="w-full py-4 rounded-xl font-bold text-base hover-glow-violet hover-shimmer"
+              onClick={() => window.open('/portfolio/Resume-JuliettaStanislaus.pdf', '_blank')}
+              className="w-full py-4 rounded-xl font-bold text-base hover-glow-violet hover-shimmer cursor-pointer"
               style={{
                 fontFamily: 'Plus Jakarta Sans',
                 background: 'var(--color-primary-container)',
                 color: 'var(--color-on-primary)',
               }}
             >
-              Contact
+              View Resume
             </button>
           </div>
         </div>

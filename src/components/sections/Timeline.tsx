@@ -514,7 +514,7 @@ function BottomCTA() {
 
         <motion.button
           onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className="px-10 py-3.5 rounded-xl font-bold text-sm relative overflow-hidden"
+          className="px-10 py-3.5 rounded-xl font-bold text-sm relative overflow-hidden cursor-pointer"
           style={{
             fontFamily: 'Plus Jakarta Sans',
             background: 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))',
