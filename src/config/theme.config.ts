@@ -38,14 +38,14 @@ export const PROJECTS = [
         image_path: '/portfolio/monolith_banner.png'
     },
     {
-        id: 'wordpress-platforms',
-        title: 'WordPress UI Platforms',
-        description: 'Built and customized WordPress sites using Elementor across multiple projects including theme development, plugin integration, and conversion-driven UI customization.',
-        tags: ['WordPress', 'Elementor', 'SCSS'],
-        url: '#',
-        cta: 'Project Details',
+        id: 'shipment-react',
+        title: 'Shipment Dashboard - React',
+        description: 'Developed the end-to-end UI/UX and fully functional frontend for a comprehensive shipping and logistics dashboard application built with React. Specialized in translating high-fidelity designs into interactive, production-ready components, custom layouts, and a conversion-focused user interface.',
+        tags: ['React', 'Tailwind', 'TypeScript', 'Vite'],
+        url: 'https://shipment-julietta-uiux.netlify.app/',
+        cta: 'Explore the app',
         size: 'small',
-        image_path: ''
+        image_path: '/portfolio/shipment_dash_banner.png'
     },
     {
         id: 'corporate-web',

@@ -16,7 +16,7 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
 const SPRING_CFG = { type: 'spring' as const, stiffness: 160, damping: 24, mass: 0.8 }
 
 // ── Tag chip ───────────────────────────────────────────────
-const TAG_COLORS: Record<string, { bg: string; color: string }> = {
+/* const TAG_COLORS: Record<string, { bg: string; color: string }> = {
     'React': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
     'Next.js': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
     'TypeScript': { bg: 'rgba(139,92,246,0.15)', color: 'var(--color-accent-violet)' },
@@ -26,6 +26,35 @@ const TAG_COLORS: Record<string, { bg: string; color: string }> = {
     'Firebase': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
     'PHP': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
     'Tailwind': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
+} */
+
+const TAG_COLORS: Record<string, { bg: string; color: string }> = {
+    // Cyan family
+    'React': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
+    'React Native': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
+    'Tailwind': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
+    'Docker': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
+    'HTML5': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+
+    // Violet family
+    'TypeScript': { bg: 'rgba(139,92,246,0.15)', color: 'var(--color-accent-violet)' },
+    'PHP': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
+    'GraphQL': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
+    'Vue': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
+
+    // Tertiary/Orange family
+    'SCSS': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+    'D3.js': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+    'Firebase': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+    'JavaScript': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+    'Node.js': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+
+    // Neutral family
+    'Next.js': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
+    'Git': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
+    'REST API': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
+    // Vite — Orange/Red family
+    'Vite': { bg: 'rgba(255,100,50,0.12)', color: 'var(--color-accent-orange, #ff6432)' }
 }
 
 function Tag({ label }: { label: string }) {
@@ -125,7 +154,7 @@ function ProjectCard({ project, index, large = false }: {
     const ref = useRef<HTMLDivElement>(null)
     const inV = useInView(ref, { once: true, margin: '-60px' })
     const [hovered, setHovered] = useState(false)
-    const hasImage: boolean | null =  project?.image_path?.trim() !== "";
+    const hasImage: boolean | null = project?.image_path?.trim() !== "";
     //project?.image_path && project?.image_path.trim() !== ""
     const cardV: Variants = {
         hidden: { opacity: 0, y: 48, scale: 0.96 },
