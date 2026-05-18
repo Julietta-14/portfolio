@@ -34,7 +34,7 @@ export const PROJECTS = [
         tags: ['HTML', 'CSS', 'Javascript'],
         url: 'https://julietta-monolith.netlify.app/',
         cta: 'Explore the site',
-        size: 'large',
+        size: 'small',
         image_path: '/portfolio/monolith_banner.png'
     },
     {
@@ -54,7 +54,7 @@ export const PROJECTS = [
         tags: ['HTML5', 'SCSS', 'JavaScript'],
         url: '#',
         cta: 'Explore Work',
-        size: 'small',
+        size: 'large',
         image_path: ''
     }
 ] as const

@@ -29,32 +29,58 @@ const SPRING_CFG = { type: 'spring' as const, stiffness: 160, damping: 24, mass:
 } */
 
 const TAG_COLORS: Record<string, { bg: string; color: string }> = {
-    // Cyan family
-    'React': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
-    'React Native': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
-    'Tailwind': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
-    'Docker': { bg: 'rgba(6,182,212,0.12)', color: 'var(--color-accent-cyan)' },
-    'HTML5': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
 
-    // Violet family
-    'TypeScript': { bg: 'rgba(139,92,246,0.15)', color: 'var(--color-accent-violet)' },
-    'PHP': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
-    'GraphQL': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
-    'Vue': { bg: 'rgba(139,92,246,0.12)', color: 'var(--color-accent-violet)' },
+    // 🔵 React — Brand Blue
+    'React': { bg: 'rgba(97,218,251,0.12)', color: '#61DAFB' },
+    'React Native': { bg: 'rgba(97,218,251,0.12)', color: '#61DAFB' },
 
-    // Tertiary/Orange family
-    'SCSS': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
-    'D3.js': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
-    'Firebase': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
-    'JavaScript': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
-    'Node.js': { bg: 'rgba(255,184,105,0.12)', color: 'var(--color-tertiary)' },
+    // 🩵 Tailwind — Brand Teal
+    'Tailwind': { bg: 'rgba(56,189,248,0.12)', color: '#38BDF8' },
 
-    // Neutral family
-    'Next.js': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
-    'Git': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
-    'REST API': { bg: 'rgba(255,255,255,0.08)', color: 'var(--color-text-secondary)' },
-    // Vite — Orange/Red family
-    'Vite': { bg: 'rgba(255,100,50,0.12)', color: 'var(--color-accent-orange, #ff6432)' }
+    // 🐳 Docker — Brand Blue
+    'Docker': { bg: 'rgba(29,99,237,0.12)', color: '#1D63ED' },
+
+    // 🟠 HTML5 — Brand Orange
+    'HTML5': { bg: 'rgba(228,77,38,0.12)', color: '#E44D26' },
+
+    // 🔷 TypeScript — Brand Blue
+    'TypeScript': { bg: 'rgba(49,120,198,0.15)', color: '#3178C6' },
+
+    // 🟣 PHP — Brand Indigo
+    'PHP': { bg: 'rgba(119,123,180,0.12)', color: '#777BB4' },
+
+    // 🌸 GraphQL — Brand Pink
+    'GraphQL': { bg: 'rgba(229,53,171,0.12)', color: '#E535AB' },
+
+    // 💚 Vue — Brand Green
+    'Vue': { bg: 'rgba(65,184,131,0.12)', color: '#41B883' },
+
+    // 🩷 SCSS — Brand Pink
+    'SCSS': { bg: 'rgba(204,102,153,0.12)', color: '#CC6699' },
+
+    // 🟡 JavaScript — Brand Yellow
+    'JavaScript': { bg: 'rgba(247,223,30,0.12)', color: '#F7DF1E' },
+
+    // 🟠 Firebase — Brand Amber
+    'Firebase': { bg: 'rgba(255,160,0,0.12)', color: '#FFA000' },
+
+    // 💛 D3.js — Brand Orange
+    'D3.js': { bg: 'rgba(249,115,22,0.12)', color: '#F97316' },
+
+    // 💚 Node.js — Brand Green
+    'Node.js': { bg: 'rgba(104,160,99,0.12)', color: '#68A063' },
+
+    // ⚫ Next.js — Brand Black/Neutral
+    'Next.js': { bg: 'rgba(255,255,255,0.08)', color: '#EDEDED' },
+
+    // 🟥 Git — Brand Red
+    'Git': { bg: 'rgba(240,80,50,0.12)', color: '#F05032' },
+
+    // 🔵 REST API — Neutral Blue
+    'REST API': { bg: 'rgba(99,102,241,0.12)', color: '#6366F1' },
+
+    // 🟠 Vite — Brand Purple/Orange
+    'Vite': { bg: 'rgba(189,52,254,0.12)', color: '#BD34FE' },
 }
 
 function Tag({ label }: { label: string }) {
