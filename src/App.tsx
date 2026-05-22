@@ -68,12 +68,14 @@ export default function App() {
             <Projects />
           </Suspense>
 
-          <Suspense fallback={<SectionFallback />}>
-            <Stats />
-          </Suspense>
+         
 
           <Suspense fallback={<SectionFallback />}>
             <Timeline />
+          </Suspense>
+
+           <Suspense fallback={<SectionFallback />}>
+            <Stats />
           </Suspense>
 
           <Suspense fallback={<SectionFallback />}>

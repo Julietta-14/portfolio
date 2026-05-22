@@ -8,8 +8,9 @@ import {
     AnimatePresence,
     type Variants,
 } from 'framer-motion'
-import { ExternalLink, ArrowRight } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
 import { PROJECTS } from '@/config/theme.config'
+import rightArrow from '../../assets/images/right-arrow.svg'
 
 // ── Easing ─────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -284,8 +285,10 @@ function ProjectCard({ project, index, large = false }: {
                             style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-accent-cyan)' }}
                             whileHover={{ opacity: 0.85 }}
                             transition={{ duration: 0.2 }}>
-                            {project.cta}
-                            <ArrowRight size={14} strokeWidth={2.5} />
+                            <span>{project.cta}</span> 
+                            <span>
+                                <img src={rightArrow} alt="rightArrow" className='text-cyan-600' style={{filter: 'brightness(0) saturate(100%) invert(42%) sepia(92%) saturate(746%) hue-rotate(160deg) brightness(94%) contrast(92%)'}}/>
+                            </span>
                         </motion.a>
                     </div>
                 </motion.div>
@@ -301,14 +304,20 @@ export default function Projects() {
     const sectionRef = useRef<HTMLElement>(null)
     const isInView = useInView(sectionRef, { once: true, margin: '-80px' })
 
-    const headerV: Variants = {
+    /* const headerV: Variants = {
         hidden: {},
         visible: { transition: { staggerChildren: 0.1 } },
     }
     const itemV: Variants = {
         hidden: { opacity: 0, y: 28 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
-    }
+    } */
+    const headerReveal = (delay: number) => ({
+        opacity: isInView ? 1 : 0,
+        transform: isInView ? 'translateY(0)' : 'translateY(24px)',
+        transition: `opacity 600ms var(--ease-out-expo) ${delay}ms,
+                 transform 600ms var(--ease-out-expo) ${delay}ms`,
+    })
 
     return (
         <section id="projects" ref={sectionRef}
@@ -324,30 +333,55 @@ export default function Projects() {
             <div className="max-w-6xl mx-auto px-4 relative z-10">
 
                 {/* Header */}
-                <motion.div
-                    className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 md:mb-16"
-                    variants={headerV} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
-
-                    <div className="space-y-4">
-                        <motion.h2 variants={itemV} className="font-black tracking-tight"
+                {/* ── Section header ── */}
+                <div className="text-center mb-16 space-y-4">
+                    <div style={headerReveal(0)}>
+                        <span
+                            className="inline-block px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
                             style={{
-                                fontFamily: 'Plus Jakarta Sans', fontSize: 'clamp(2rem,5vw,3.5rem)',
-                                color: 'var(--color-text-primary)', lineHeight: 1.06
-                            }}>
-                            Featured{' '}
-                            <motion.span
-                                style={{
-                                    background: 'linear-gradient(135deg,var(--color-accent-violet),var(--color-accent-cyan))',
-                                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text', backgroundSize: '200%'
-                                }}
-                                animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-                                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}>
-                                Works
-                            </motion.span>
-                        </motion.h2>
+                                background: 'rgba(6,182,212,0.1)',
+                                border: '1px solid rgba(6,182,212,0.2)',
+                                color: 'var(--color-accent-cyan)',
+                                fontFamily: 'Inter',
+                            }}
+                        >
+                            Projects
+                        </span>
                     </div>
-                </motion.div>
+
+                    <h2
+                        className="font-black tracking-tight"
+                        style={{
+                            ...headerReveal(100),
+                            fontFamily: 'Plus Jakarta Sans',
+                            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                            color: 'var(--color-text-primary)',
+                        }}
+                    >
+                        Featured {' '}
+                        <span
+                            style={{
+                                background: 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                            }}
+                        >
+                            Works
+                        </span>
+                    </h2>
+
+                    <p
+                        className="text-base max-w-xl mx-auto"
+                        style={{
+                            ...headerReveal(200),
+                            fontFamily: 'Inter',
+                            color: 'var(--color-text-muted)',
+                        }}
+                    >
+                        Built with modern tools to ensure efficiency, scalability, and long-term maintainability.
+                    </p>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 auto-rows-[minmax(200px,auto)]">
 

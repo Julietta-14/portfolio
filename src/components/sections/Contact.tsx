@@ -10,6 +10,8 @@ import {
 } from 'framer-motion'
 import { Mail, ShieldCheck, Send, RotateCcw, Check } from 'lucide-react'
 import { SITE_CONFIG } from '@/config/theme.config'
+import myImage from '../../assets/images/julietta-img-2.png'
+import contact from '../../assets/images/prime_send.svg'
 
 // ── Easing ─────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -181,11 +183,12 @@ function ConnectLink({ iconEl, label, value, href, delay }: {
     iconEl: React.ReactNode; label: string; value: string; href: string; delay: number
 }) {
     return (
-        <motion.a
+        <div className='flex '>
+             <motion.a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-4 rounded-xl"
+            className=" gap-3 p-2 rounded-md d-inline"
             style={{ background: S.surface, border: S.border }}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -193,13 +196,10 @@ function ConnectLink({ iconEl, label, value, href, delay }: {
             transition={{ duration: 0.55, ease: EASE, delay }}
             whileHover={{ x: 4, boxShadow: '0 6px 28px rgba(139,92,246,0.18)' }}
         >
-            <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 overflow-hidden"
-                style={{ background: 'rgba(139,92,246,0.08)' }}
-            >
+           
                 {iconEl}
-            </div>
-            <div className="min-w-0 flex-1">
+            
+           {/* <div className="min-w-0 flex-1">
                 <span className="block text-[10px] font-bold uppercase tracking-widest mb-0.5"
                     style={{ fontFamily: 'Inter', color: 'var(--color-text-muted)' }}>
                     {label}
@@ -212,8 +212,10 @@ function ConnectLink({ iconEl, label, value, href, delay }: {
             <span className="text-sm opacity-40 group-hover:opacity-100"
                 style={{ color: 'var(--color-accent-violet)' }}>
                 →
-            </span>
-        </motion.a>
+            </span> */}
+        </motion.a> 
+        </div>
+       
     )
 }
 
@@ -232,7 +234,7 @@ function SendButton({ state, onClick }: { state: FormState; onClick: () => void 
         <motion.button
             onClick={onClick}
             disabled={disabled}
-            className="relative inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl font-bold text-sm overflow-hidden"
+            className="submit-btn relative inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-lg font-bold text-sm overflow-hidden"
             style={{
                 fontFamily: 'Plus Jakarta Sans', background: bg, color: '#fff', boxShadow: shadow,
                 cursor: disabled ? 'not-allowed' : 'pointer'
@@ -510,70 +512,78 @@ export default function Contact() {
                 </motion.div>
 
                 {/* ── Two-column body ─────────────────────── */}
-                <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 lg:gap-12 items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-8 lg:gap-12 items-stretch">
 
                     {/* LEFT sidebar */}
                     <motion.aside
-                        className="flex flex-col gap-3 order-2 lg:order-1"
+                        className="flex flex-col gap-3  rounded-2xl "
                         initial={{ opacity: 0, x: -28 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
+                         style={{
+                                background: S.surface, border: S.border,
+                                boxShadow: '0 24px 64px rgba(0,0,0,0.1)'
+                            }}
                     >
-                        <p className="text-xs font-bold uppercase tracking-[0.15em] mb-0.5 px-0.5"
+                        <div className='reachout-block'>
+                           {/* <p className="text-xs font-bold uppercase tracking-[0.15em] mb-0.5 px-0.5"
                             style={{ fontFamily: 'Inter', color: 'var(--color-text-muted)' }}>
                             Reach out
-                        </p>
-
-                        {CONNECT_LINKS.map(l => <ConnectLink key={l.label} {...l} />)}
-
-                        {/* Collab card — grows to fill remaining height */}
-                        <motion.div
-                            className="flex-1 mt-1 p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between"
-                            style={{ background: S.surface, border: S.border, minHeight: 160 }}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
-                            transition={{ duration: 0.65, ease: EASE, delay: 0.65 }}
-                            whileHover={{ scale: 1.012, boxShadow: '0 12px 36px rgba(139,92,246,0.15)' }}
-                            whileTap={{ scale: 0.99 }}
-                        >
-                            {/* Animated top gradient line */}
-                            <motion.div className="absolute top-0 left-0 right-0 h-px pointer-events-none"
-                                style={{ background: 'linear-gradient(90deg, var(--color-accent-violet), var(--color-accent-cyan), var(--color-accent-violet))', backgroundSize: '200%' }}
-                                animate={{ backgroundPosition: ['0% 0%', '200% 0%'] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                            />
-                            {/* Shimmer sweep */}
-                            <motion.div className="absolute inset-0 pointer-events-none"
-                                style={{ background: 'linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.04) 50%, transparent 62%)' }}
-                                animate={{ x: ['-110%', '210%'] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: 'linear', repeatDelay: 3.5 }}
-                            />
-
-                            <div>
-                                <h4 className="font-black text-base mb-2"
-                                    style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-text-primary)' }}>
-                                    Resume
-                                </h4>
-                                <p className="text-sm"
-                                    style={{ fontFamily: 'Inter', color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
-                                    Senior UI Developer with expertise in design systems, React architecture, and immersive web experiences.
-                                </p>
+                            </p> */}
+                            <div className="rounded-2xl overflow-hidden bg-[#1a1a2e] flex justify-center">
+                                <img alt="Julietta image" className=" object-cover" src={myImage} />
                             </div>
-                            <a
-                                href="/portfolio/Resume-JuliettaStanislaus.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs font-bold mt-3 inline-flex items-center gap-1.5 hover:underline"
-                                style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-accent-cyan)' }}
-                            >
-                                View Resume →
-                            </a>
-                        </motion.div>
+                        </div>
+                        <div className='p-3'>
+                        
+                            <div className='flex gap-3 justify-center'>
+                                {CONNECT_LINKS.map(l => <ConnectLink key={l.label} {...l} />)}
+                            </div>
+                        
+
+                            {/* Collab card — grows to fill remaining height */}
+                            <div
+                                className="mt-3 flex gap-3 items-center justify-center"
+                                >
+                                <a
+                                    href="/portfolio/Resume-JuliettaStanislaus.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs font-bold inline-flex items-center gap-1.5  p-3 px-4 rounded-md "
+                                    style={{ background: S.surface, border: S.border }}
+                                > 
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="var(--color-text-primary)"   viewBox="0 0 256 256"><path d="M228 152v56a20 20 0 0 1-20 20H48a20 20 0 0 1-20-20v-56a12 12 0 0 1 24 0v52h152v-52a12 12 0 0 1 24 0Zm-108.49 8.49a12 12 0 0 0 17 0l40-40a12 12 0 0 0-17-17L140 123V40a12 12 0 0 0-24 0v83l-19.51-19.49a12 12 0 0 0-17 17Z"></path>
+                                        </svg>
+                                    </span>
+                                    <span>
+                                        Download CV
+                                    </span>
+                                </a>
+                                <a
+                                href="mailto:julietta.stanislaus@outlook.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-xs font-bold inline-flex items-center gap-1.5  p-3 px-4 rounded-md "
+                                    style={{ background: S.surface, border: S.border }}
+                                    >
+                                    <span>
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.2477 2.75256C15.1058 2.61169 14.9279 2.51265 14.7334 2.46634C14.5389 2.42003 14.3354 2.42824 14.1452 2.49006L3.17272 6.15006C2.96922 6.21454 2.78939 6.33788 2.65596 6.5045C2.52252 6.67113 2.44145 6.87356 2.42299 7.08623C2.40453 7.29889 2.44951 7.51226 2.55225 7.69938C2.65499 7.88651 2.81087 8.03898 3.00022 8.13756L7.55272 10.3876L9.80271 14.9551C9.89315 15.1338 10.0315 15.2839 10.2024 15.3886C10.3733 15.4932 10.5699 15.5483 10.7702 15.5476H10.8452C11.0598 15.5318 11.2646 15.4518 11.4332 15.318C11.6017 15.1843 11.7261 15.0029 11.7902 14.7976L15.5027 3.85506C15.569 3.66601 15.5802 3.46202 15.5351 3.26683C15.4899 3.07165 15.3903 2.8933 15.2477 2.75256ZM3.63772 7.18506L13.2152 3.99006L7.89772 9.30756L3.63772 7.18506ZM10.8227 14.3626L8.69272 10.1026L14.0102 4.78506L10.8227 14.3626Z" fill="var(--color-text-primary)"/>
+</svg>
+
+                                    </span>
+                                    <span>
+                                        Contact Me
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
                     </motion.aside>
 
                     {/* RIGHT form card */}
                     <motion.div
-                        className="order-1 lg:order-2"
+                        className=""
                         initial={{ opacity: 0, x: 28 }}
                         animate={isInView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.7, ease: EASE, delay: 0.3 }}

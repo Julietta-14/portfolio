@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { SITE_CONFIG } from '@/config/theme.config'
 import { useTheme } from '@/context/ThemeContext'
+import jsLogo from '../../assets/images/JS-logo.svg'
+import rightArrow from '../../assets/images/right-arrow.svg'
 
 // ── Animated counter hook ──────────────────────────────────
 function useCounter(target: number, duration = 1500, start = false) {
@@ -222,7 +224,9 @@ export default function Hero() {
 
                         {/* Availability badge */}
                         <div style={reveal(0)}>
-                            <span
+                            
+                               
+                            <p
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
                                 style={{
                                     background: 'rgba(139,92,246,0.12)',
@@ -231,12 +235,12 @@ export default function Hero() {
                                     fontFamily: 'Inter',
                                 }}
                             >
-                                <span
-                                    className="w-2 h-2 rounded-full animate-pulse"
+                                 <span
+                                    className="w-2 h-2 rounded-full animate-pulse pr-2"
                                     style={{ background: 'var(--color-accent-violet)' }}
                                 />
                                 {SITE_CONFIG.availability}
-                            </span>
+                            </p>
                         </div>
 
                         {/* Main heading */}
@@ -299,18 +303,18 @@ export default function Hero() {
                                     document.querySelector("#projects")
                                         ?.scrollIntoView({ behavior: "smooth" })
                                 }}
-                                className="group relative overflow-hidden px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 text-white bg-[linear-gradient(135deg,var(--color-accent-violet),var(--color-accent-cyan))] shadow-[0_4px_24px_rgba(139,92,246,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,92,246,0.5)]  active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent-violet)"
+                                className="group relative overflow-hidden px-8 py-4 rounded-lg font-bold text-base transition-all duration-300 text-white bg-[linear-gradient(135deg,var(--color-accent-violet),var(--color-accent-cyan))] shadow-[0_4px_24px_rgba(139,92,246,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(139,92,246,0.5)]  active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent-violet)"
                                 style={{
                                     fontFamily: "Plus Jakarta Sans",
                                 }}
                             >
-                                <span className="relative z-10 flex items-center gap-2">
+                                <span className="relative z-10 flex items-center gap-2 pr-2">
                                     Explore Projects
-                                    <span className="transition-transform duration-200 group-hover:translate-x-1">
-                                        →
-                                    </span>
+                                    
                                 </span>
-
+                                <span className="transition-transform duration-200 group-hover:translate-x-1">
+                                       <img src={rightArrow} alt="right arrow"/>
+                                    </span>
                                 {/* Shimmer overlay */}
                                 <span
                                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -328,7 +332,7 @@ export default function Hero() {
                                     document.querySelector("#contact")
                                         ?.scrollIntoView({ behavior: "smooth" })
                                 }}
-                                className="px-8 py-4 rounded-xl font-bold text-base text-(--color-text-primary) border border-(--color-outline-variant) hover-pill cursor-pointer"
+                                className="px-8 py-4 rounded-lg font-bold text-base text-(--color-text-primary) border border-(--color-outline-variant) hover-pill cursor-pointer"
                                 style={{ fontFamily: "Plus Jakarta Sans" }}
                             >
                                 Start a Conversation
@@ -371,14 +375,14 @@ export default function Hero() {
                                     {/* Profile row */}
                                     <div className="flex items-center gap-4">
                                         <div
-                                            className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black"
+                                            className="w-14 h-14 rounded-md p-2 flex items-center justify-center text-2xl font-black"
                                             style={{
                                                 background: 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))',
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 color: '#fff',
                                             }}
                                         >
-                                            UI
+                                            <img src={jsLogo} alt=" Julietta Stanislaus"/>
                                         </div>
                                         <div>
                                             <p className="font-bold text-sm" style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-text-primary)' }}>
@@ -402,9 +406,9 @@ export default function Hero() {
 
                                     {/* Skill bars */}
                                     {[
-                                        { label: 'HTML5 / CSS3 / SCSS', pct: 99, color: 'var(--color-accent-violet)' },
+                                        { label: 'HTML5 / CSS3 / SCSS ', pct: 99, color: 'var(--color-accent-violet)' },
                                         { label: 'JavaScript / jQuery', pct: 97, color: 'var(--color-accent-cyan)' },
-                                        { label: 'React / Tailwind CSS', pct: 92, color: 'var(--color-tertiary)' },
+                                        { label: 'React / Tailwind CSS / Bootstrap / Angular', pct: 92, color: 'var(--color-tertiary)' },
                                         { label: 'Figma → Code', pct: 95, color: 'var(--color-accent-violet)' }
                                     ].map(({ label, pct, color }) => (
                                         <div key={label} className="space-y-1">

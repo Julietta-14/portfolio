@@ -1,4 +1,26 @@
 /* MASTER THEME CONFIG — edit here to restyle everything */
+import html from '../assets/images/html.png'
+import css from '../assets/images/css.png'
+import javascript from '../assets/images/javascript.png'
+import jquery from '../assets/images/jquery.png'
+import react from '../assets/images/react.png'
+import tailwindcss from '../assets/images/tailwindcss.png'
+import bootstrap from '../assets/images/bootstrap.png'
+import angular from '../assets/images/angular.png'
+import figma from '../assets/images/figma.png'
+import wordpress from '../assets/images/wordpress.png'
+
+type Project = {
+    id: string;
+    title: string;
+    description: string;
+    tags: string[];
+    url: string;
+    cta: string;
+    size: "small" | "large";
+    image_path: string;
+};
+
 
 export const SITE_CONFIG = {
     name: 'Julietta Stanislaus',
@@ -8,7 +30,7 @@ export const SITE_CONFIG = {
     email: 'julietta.stanislaus@outlook.com',
     linkedin: 'https://linkedin.com/in/julietta-stanislaus/',
     github: 'https://github.com/Julietta-14',
-    availability: 'Available for Architecture',
+    availability: 'Available for Work',
 } as const
 
 export const THEME_CONFIG = {
@@ -22,16 +44,16 @@ export const THEME_CONFIG = {
 export const NAV_LINKS = [
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Timeline', href: '#timeline' },
+    { label: 'Journey', href: '#timeline' },
     { label: 'Contact', href: '#contact' },
 ] as const
 
-export const PROJECTS = [
+export const PROJECTS: Project[] = [
     {
         id: 'uiux-framework',
         title: 'Monolith',
         description: 'A high-fidelity monolithic landing page crafted for a confidential enterprise client under NDA, designed to deliver a visually immersive, scroll-driven experience with strong narrative flow, performance optimization, and responsive static architecture using HTML, CSS, and JavaScript.',
-        tags: ['HTML', 'CSS', 'Javascript'],
+        tags: ['HTML', 'CSS', 'Javascript', 'Bootstrap'],
         url: 'https://julietta-monolith.netlify.app/',
         cta: 'Explore the site',
         size: 'small',
@@ -47,7 +69,7 @@ export const PROJECTS = [
         size: 'small',
         image_path: '/portfolio/shipment_dash_banner.png'
     },
-    {
+    /*{
         id: 'corporate-web',
         title: 'Corporate Web Interfaces',
         description: 'Designed and delivered corporate websites and e-commerce platforms end-to-end - from Figma wireframes to pixel-perfect, production-ready implementation.',
@@ -56,45 +78,85 @@ export const PROJECTS = [
         cta: 'Explore Work',
         size: 'large',
         image_path: ''
-    }
+    }*/
 ] as const
+
 
 export const SKILLS = [
     {
         category: 'Languages',
         icon: '{ }',
         items: [
-            { name: 'HTML5 / CSS3 / SCSS', level: 'Expert' },
-            { name: 'JavaScript (ES6+)', level: 'Expert' },
-            { name: 'JQuery', level: 'Advanced' },
+            {
+                img: html,
+                skillName: "HTML",
+                skillDes: "Markup Language",
+            },
+            {
+                img: css,
+                skillName: "CSS",
+                skillDes: "Visual Styling",
+            },
+            {
+                img: javascript,
+                skillName: "Javascript",
+                skillDes: "Interactive Programming",
+            },
+            {
+                img: jquery,
+                skillName: "jQuery",
+                skillDes: "Interactive Effects",
+            }
         ],
     },
     {
         category: 'Frameworks',
         icon: '⚛',
         items: [
-            { name: 'React', level: 'Medium' },
-            { name: 'Tailwind CSS', level: 'Expert' },
-            { name: 'Bootstrap', level: 'Expert' },
+            {
+                img: react,
+                skillName: "React",
+                skillDes: "Component Development",
+            },
+            {
+                img: angular,
+                skillName: "Angular",
+                skillDes: "Visual Styling",
+            },
+            {
+                img: tailwindcss,
+                skillName: "Tailwind CSS",
+                skillDes: "Utility Styling",
+            },
+            {
+                img: bootstrap,
+                skillName: "Bootstrap",
+                skillDes: "Responsive Framework",
+            }
         ],
     },
     {
         category: 'Design Tools',
         icon: '✦',
         items: [
-            { name: 'Figma', level: 'Power User' },
-            { name: 'Figma-to-Code', level: 'Advanced' },
-            { name: 'UI/UX Wireframing', level: 'Advanced' },
+            {
+                img: figma,
+                skillName: "Figma",
+                skillDes: "UI Prototyping",
+            }
         ],
     },
     {
         category: 'Platforms',
         icon: '⬡',
         items: [
-            { name: 'WordPress / Elementor', level: 'Expert' },
-            { name: 'E-commerce UI/UX', level: 'Expert' }
+            {
+                img: wordpress,
+                skillName: "WordPress/Elementor",
+                skillDes: "Content Management",
+            }
         ],
-    },
+    }
 ] as const
 
 export const TIMELINE = [

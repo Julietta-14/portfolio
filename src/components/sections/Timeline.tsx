@@ -8,6 +8,7 @@ import {
   type Variants,
 } from 'framer-motion'
 import { TIMELINE } from '@/config/theme.config'
+import rightArrow from '../../assets/images/right-arrow.svg'
 
 // ─── Easing curves ────────────────────────────────────────
 const EASE_ANIMATE: [number, number, number, number] = [0.16, 1, 0.3, 1]   // expo out — silky
@@ -428,7 +429,7 @@ function SectionHeader({ inView }: { inView: boolean }) {
 
       <motion.h2
         variants={itemVariants}
-        className="font-black tracking-tight"
+        className="title-journey font-black tracking-tight"
         style={{
           fontFamily: 'Plus Jakarta Sans',
           fontSize:   'clamp(2.2rem, 6vw, 4rem)',
@@ -457,7 +458,7 @@ function SectionHeader({ inView }: { inView: boolean }) {
         className="text-base max-w-md mx-auto"
         style={{ fontFamily: 'Inter', color: 'var(--color-text-muted)' }}
       >
-        A decade of turning complex problems into elegant, high-performance interfaces.
+        7+ years of transforming complex challenges into elegant, high-performance digital experiences.
       </motion.p>
     </motion.div>
   )
@@ -514,7 +515,7 @@ function BottomCTA() {
 
         <motion.button
           onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className="px-10 py-3.5 rounded-xl font-bold text-sm relative overflow-hidden cursor-pointer"
+          className="px-10 py-3.5 rounded-lg font-bold text-sm relative overflow-hidden cursor-pointer"
           style={{
             fontFamily: 'Plus Jakarta Sans',
             background: 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))',
@@ -533,7 +534,8 @@ function BottomCTA() {
             animate={{ x: ['-100%', '200%'] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'linear', repeatDelay: 1.5 }}
           />
-          <span className="relative z-10">Let's Connect →</span>
+          <span className="relative z-10">Let's Connect </span>
+          <span className='pl-2'><img src={rightArrow} alt="right arrow" /></span>
         </motion.button>
       </motion.div>
     </motion.div>

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { Mail, ArrowUp, Code2 } from 'lucide-react'
+import jsLogo from '../../assets/images/JS-fav-icon.png'
 
 const GithubIcon = ({ size = 16 }: { size?: number }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -171,7 +172,7 @@ function AnimatedLogo() {
             transition={EASE_SPRING_F}
         >
             <motion.div
-                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                className="w-12 h-12 rounded-md p-2 flex items-center justify-center text-2xl font-black"
                 style={{
                     background: hovered
                         ? 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))'
@@ -180,7 +181,9 @@ function AnimatedLogo() {
                     transition: 'background 300ms',
                 }}
             >
-                <Code2 size={16} style={{ color: hovered ? '#fff' : 'var(--color-accent-violet)', transition: 'color 300ms' }} />
+
+                 <img src={jsLogo} alt=" Julietta Stanislaus" style={{ color: hovered ? '#fff' : 'var(--color-accent-violet)', transition: 'color 300ms' }} />
+                 
             </motion.div>
             <span
                 className="font-black tracking-tight text-xl select-none"

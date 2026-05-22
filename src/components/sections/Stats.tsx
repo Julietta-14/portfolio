@@ -260,7 +260,7 @@ export default function StatsSection() {
 
                         {/* CTA */}
                         <motion.a
-                            className="relative z-10 mt-8 inline-flex items-center justify-center py-3.5 px-6 rounded-2xl font-bold text-sm"
+                            className="relative z-10 mt-8 inline-flex items-center justify-center py-3.5 px-6 rounded-lg font-bold text-sm"
                             style={{
                                 fontFamily: "Plus Jakarta Sans",
                                 border: "1.5px solid rgba(255,255,255,0.3)",

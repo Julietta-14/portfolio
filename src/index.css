@@ -410,3 +410,11 @@ body {
 [data-theme="light"] ::-webkit-scrollbar-thumb {
   background: var(--color-accent-violet);
 }
+.skilllogos{
+  max-width: 32px;
+  width: 100%;
+}
+span:not(.title-journey span):not(.submit-btn span) {
+  display: inline-block;
+  vertical-align: middle;
+}

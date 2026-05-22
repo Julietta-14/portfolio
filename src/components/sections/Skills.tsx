@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { SKILLS, PHILOSOPHY, EXTRA_SKILLS } from '@/config/theme.config'
+import html from '../../assets/images/html.png'
+import css from '../../assets/images/css.png'
+import javascript from '../../assets/images/javascript.png'
+import jquery from '../../assets/images/jquery.png'
 
 // ── Intersection observer hook ─────────────────────────────
 function useInView(threshold = 0.2) {
@@ -43,14 +47,14 @@ function SkillCard({
     category, icon, items, index, inView,
 }: {
     category: string; icon: string
-    items: readonly { name: string; level: string }[]
+    items: readonly { img: string; skillName: string ; skillDes: string }[]
     index: number; inView: boolean
 }) {
     const [hovered, setHovered] = useState(false)
 
     return (
         <div
-            className="relative rounded-2xl p-6 transition-all duration-500 overflow-hidden"
+            className="relative rounded-2xl p-4 transition-all duration-500 overflow-hidden"
             style={{
                 background: hovered
                     ? 'var(--color-surface-high)'
@@ -104,16 +108,47 @@ function SkillCard({
             </div>
 
             {/* Items */}
-            <ul className="space-y-3">
-                {items.map(({ name, level }) => (
-                    <li key={name} className="flex items-center justify-between gap-2">
-                        <span
-                            className="text-sm"
-                            style={{ fontFamily: 'Inter', color: 'var(--color-text-secondary)' }}
+            <ul className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-4 mb-2">
+                {items.map(({img, skillName ,skillDes }) => (
+                    <li key={img} className="">
+                        <div key={index} className='tool-box gap-2 flex-wrap flex relative items-center rounded-lg p-3 transition-all duration-500 overflow-hidden'
+                        style={{
+                            background: hovered
+                                ? 'var(--color-surface-high)'
+                                : 'var(--color-surface-container)',
+                            border: `1px solid ${hovered
+                                ? 'rgba(139,92,246,0.3)'
+                                : 'rgba(255,255,255,0.06)'}`,
+                            boxShadow: hovered
+                                ? '0 16px 48px rgba(139,92,246,0.15)'
+                                : '0 4px 16px rgba(0,0,0,0.2)',
+                            transform: inView
+                                ? 'translateY(0) scale(1)'
+                                : 'translateY(40px) scale(0.97)',
+                            opacity: inView ? 1 : 0,
+                            transition: `transform 600ms var(--ease-out-expo) ${1 * 100}ms,
+                                opacity   600ms var(--ease-out-expo) ${1 * 100}ms,
+                                background 300ms, border-color 300ms, box-shadow 300ms`,
+                        }}
+                    >
+                        <div
+                            className=" rounded-md p-2 flex items-center justify-center text-lg font-bold"
+                            style={{
+                                background:  'rgba(139,92,246,0.12)',
+                                color: hovered ? '#fff' : 'var(--color-accent-violet)',
+                                transition: 'background 300ms, color 300ms',
+                                
+                            }}
                         >
-                            {name}
-                        </span>
-                        <LevelBadge level={level} />
+                            <img src={img} alt={skillName} className='skilllogos'/>
+                        </div>
+                        <div>
+                            <p className='text-sm'>{skillName}</p>
+                            <p className='text-xs' style={{color: 'var(--color-text-secondary)'}} >
+                                {skillDes}
+                            </p>
+                        </div>
+                        </div>
                     </li>
                 ))}
             </ul>
@@ -206,7 +241,6 @@ export default function Skills() {
         transition: `opacity 600ms var(--ease-out-expo) ${delay}ms,
                  transform 600ms var(--ease-out-expo) ${delay}ms`,
     })
-
     return (
         <section
             id="skills"
@@ -274,12 +308,13 @@ export default function Skills() {
                             color: 'var(--color-text-muted)',
                         }}
                     >
-                        Built with modern tools to ensure efficiency, scalability, and long-term maintainability.
+                        Crafting responsive, interactive, and user-focused digital experiences with modern frontend technologies
                     </p>
                 </div>
 
                 {/* ── Skill cards grid ── */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+                <div >
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 mb-16">
                     {SKILLS.map((skill, i) => (
                         <SkillCard
                             key={skill.category}
@@ -290,6 +325,7 @@ export default function Skills() {
                             inView={inView}
                         />
                     ))}
+                    </div>
                 </div>
 
                 {/* ── Divider ── */}
@@ -302,6 +338,7 @@ export default function Skills() {
                 />
 
                 {/* ── Core Philosophy ── */}
+                {/*
                 <div className="text-center mb-12">
                     <h2
                         className="font-black tracking-tight"
@@ -326,7 +363,7 @@ export default function Skills() {
                         Principles that drive every line of code and every pixel.
                     </p>
                 </div>
-
+                
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
                     {PHILOSOPHY.map((p, i) => (
                         <PhilosophyCard
@@ -339,6 +376,8 @@ export default function Skills() {
                         />
                     ))}
                 </div>
+                     */}
+                
 
                 {/* ── Extra skill pills ── */}
                 <div
