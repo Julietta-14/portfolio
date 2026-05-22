@@ -224,8 +224,8 @@ export default function Hero() {
 
                         {/* Availability badge */}
                         <div style={reveal(0)}>
-                            
-                               
+
+
                             <p
                                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
                                 style={{
@@ -235,7 +235,7 @@ export default function Hero() {
                                     fontFamily: 'Inter',
                                 }}
                             >
-                                 <span
+                                <span
                                     className="w-2 h-2 rounded-full animate-pulse pr-2"
                                     style={{ background: 'var(--color-accent-violet)' }}
                                 />
@@ -310,11 +310,11 @@ export default function Hero() {
                             >
                                 <span className="relative z-10 flex items-center gap-2 pr-2">
                                     Explore Projects
-                                    
+
                                 </span>
                                 <span className="transition-transform duration-200 group-hover:translate-x-1">
-                                       <img src={rightArrow} alt="right arrow"/>
-                                    </span>
+                                    <img src={rightArrow} alt="right arrow" />
+                                </span>
                                 {/* Shimmer overlay */}
                                 <span
                                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -382,7 +382,7 @@ export default function Hero() {
                                                 color: '#fff',
                                             }}
                                         >
-                                            <img src={jsLogo} alt=" Julietta Stanislaus"/>
+                                            <img src={jsLogo} alt=" Julietta Stanislaus" />
                                         </div>
                                         <div>
                                             <p className="font-bold text-sm" style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-text-primary)' }}>
@@ -470,26 +470,30 @@ export default function Hero() {
 
                 {/* Scroll indicator */}
                 <div className='relative mt-20'>
-                    <div
-                        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 anim-fade-in"
-                        style={{ animationDelay: '1520ms' }}
-                    >
-                        <span
-                            className="text-[10px] font-semibold tracking-[0.22em] uppercase"
-                            style={{ color: 'var(--color-text-muted)' }}
-                        >
-                            Scroll
-                        </span>
+                    <a href="#skills">
                         <div
-                            className="w-5.5 h-9 rounded-full border flex items-start justify-center pt-1.5"
-                            style={{ borderColor: 'var(--color-text-muted)' }}
+                            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 anim-fade-in"
+                            style={{ animationDelay: '1520ms' }}
                         >
+
+                            <span
+                                className="text-[10px] font-semibold tracking-[0.22em] uppercase"
+                                style={{ color: 'var(--color-text-muted)' }}
+                            >
+                                Scroll
+                            </span>
+
                             <div
-                                className="w-1.25 h-2 rounded-full anim-scroll-bounce"
-                                style={{ background: 'var(--color-accent-violet)' }}
-                            />
+                                className="w-5.5 h-9 rounded-full border flex items-start justify-center pt-1.5"
+                                style={{ borderColor: 'var(--color-text-muted)' }}
+                            >
+                                <div
+                                    className="w-1.25 h-2 rounded-full anim-scroll-bounce"
+                                    style={{ background: 'var(--color-accent-violet)' }}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 

@@ -269,7 +269,7 @@ export default function StatsSection() {
                                 textDecoration: "none",
                             }}
                             target='_blank'
-                            href="https://www.w3.org/WAI/standards-guidelines/act/"
+                            href="/portfolio/EAA-PPT.pdf"
                             whileHover={{
                                 scale: 1.03,
                                 backgroundColor: "#fff",

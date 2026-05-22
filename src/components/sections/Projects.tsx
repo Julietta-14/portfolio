@@ -59,6 +59,9 @@ const TAG_COLORS: Record<string, { bg: string; color: string }> = {
     // 🩷 SCSS — Brand Pink
     'SCSS': { bg: 'rgba(204,102,153,0.12)', color: '#CC6699' },
 
+    // 🩷 CSS — Brand Pink
+    'CSS': { bg: 'rgba(204,102,153,0.12)', color: '#CC6699' },
+
     // 🟡 JavaScript — Brand Yellow
     'JavaScript': { bg: 'rgba(247,223,30,0.12)', color: '#F7DF1E' },
 
@@ -82,6 +85,8 @@ const TAG_COLORS: Record<string, { bg: string; color: string }> = {
 
     // 🟠 Vite — Brand Purple/Orange
     'Vite': { bg: 'rgba(189,52,254,0.12)', color: '#BD34FE' },
+
+    'Boostrap': { bg: 'rgba(249,115,22,0.12)', color: '#F97316' },
 }
 
 function Tag({ label }: { label: string }) {
@@ -379,7 +384,7 @@ export default function Projects() {
                             color: 'var(--color-text-muted)',
                         }}
                     >
-                        Built with modern tools to ensure efficiency, scalability, and long-term maintainability.
+                        Explore some of the web experiences and interfaces I've designed and developed.
                     </p>
                 </div>
 

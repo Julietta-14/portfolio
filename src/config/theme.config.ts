@@ -53,7 +53,7 @@ export const PROJECTS: Project[] = [
         id: 'uiux-framework',
         title: 'Monolith',
         description: 'A high-fidelity monolithic landing page crafted for a confidential enterprise client under NDA, designed to deliver a visually immersive, scroll-driven experience with strong narrative flow, performance optimization, and responsive static architecture using HTML, CSS, and JavaScript.',
-        tags: ['HTML', 'CSS', 'Javascript', 'Bootstrap'],
+        tags: ['HTML5', 'CSS', 'JavaScript', 'Boostrap'],
         url: 'https://julietta-monolith.netlify.app/',
         cta: 'Explore the site',
         size: 'small',
