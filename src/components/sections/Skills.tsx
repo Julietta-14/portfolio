@@ -1,9 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { SKILLS, PHILOSOPHY, EXTRA_SKILLS } from '@/config/theme.config'
-import html from '../../assets/images/html.png'
-import css from '../../assets/images/css.png'
-import javascript from '../../assets/images/javascript.png'
-import jquery from '../../assets/images/jquery.png'
+import { SKILLS, EXTRA_SKILLS } from '@/config/theme.config'
 
 // ── Intersection observer hook ─────────────────────────────
 function useInView(threshold = 0.2) {
@@ -155,80 +151,6 @@ function SkillCard({
         </div>
     )
 }
-
-// ── Philosophy card ────────────────────────────────────────
-function PhilosophyCard({
-    icon, title, description, index, inView,
-}: {
-    icon: string; title: string; description: string
-    index: number; inView: boolean
-}) {
-    const [hovered, setHovered] = useState(false)
-
-    return (
-        <div
-            className="relative rounded-2xl p-8 overflow-hidden transition-all duration-500"
-            style={{
-                background: hovered
-                    ? 'var(--color-surface-high)'
-                    : 'var(--color-surface-container)',
-                border: `1px solid ${hovered
-                    ? 'rgba(6,182,212,0.3)'
-                    : 'rgba(255,255,255,0.06)'}`,
-                boxShadow: hovered
-                    ? '0 16px 48px rgba(6,182,212,0.1)'
-                    : '0 4px 16px rgba(0,0,0,0.15)',
-                transform: inView
-                    ? 'translateY(0)'
-                    : 'translateY(50px)',
-                opacity: inView ? 1 : 0,
-                transition: `transform 700ms var(--ease-out-expo) ${600 + index * 120}ms,
-                    opacity   700ms var(--ease-out-expo) ${600 + index * 120}ms,
-                    background 300ms, border-color 300ms, box-shadow 300ms`,
-            }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
-            {/* Background number watermark */}
-            <span
-                className="absolute -top-4 -right-2 text-8xl font-black select-none pointer-events-none"
-                style={{
-                    fontFamily: 'Plus Jakarta Sans',
-                    color: 'var(--color-surface-low)',
-                }}
-            >
-                {String(index + 1).padStart(2, '0')}
-            </span>
-
-            {/* Icon */}
-            <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6"
-                style={{
-                    background: hovered
-                        ? 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))'
-                        : 'rgba(139,92,246,0.1)',
-                    transition: 'background 300ms',
-                }}
-            >
-                {icon}
-            </div>
-
-            <h3
-                className="text-xl font-bold mb-3"
-                style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-text-primary)' }}
-            >
-                {title}
-            </h3>
-            <p
-                className="text-sm leading-relaxed"
-                style={{ fontFamily: 'Inter', color: 'var(--color-text-muted)' }}
-            >
-                {description}
-            </p>
-        </div>
-    )
-}
-
 
 
 // ── Main Section ───────────────────────────────────────────
