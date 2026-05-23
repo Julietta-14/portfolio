@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { SITE_CONFIG } from '@/config/theme.config'
+import { HERO_PANEL_SHOW_IMG, SITE_CONFIG } from '@/config/theme.config'
 import { useTheme } from '@/context/ThemeContext'
 import jsLogo from '../../assets/images/JS-logo.svg'
 import rightArrow from '../../assets/images/right-arrow.svg'
+import dark_hero_panel from '../../assets/images/dk-panel.png';
+import light_hero_panel from '../../assets/images/lt-panel.png';
 
 // ── Animated counter hook ──────────────────────────────────
 function useCounter(target: number, duration = 1500, start = false) {
@@ -353,106 +355,11 @@ export default function Hero() {
                     >
                         <div className="relative w-full max-w-sm">
 
-                            {/* Floating card */}
-                            <div
-                                className="relative rounded-3xl overflow-hidden"
-                                style={{
-                                    background: 'var(--color-surface-container)',
-                                    border: '1px solid rgba(255,255,255,0.08)',
-                                    boxShadow: '0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(139,92,246,0.1)',
-                                    animation: 'floatY 6s ease-in-out infinite',
-                                }}
-                            >
-                                {/* Top gradient bar */}
-                                <div
-                                    className="h-1 w-full"
-                                    style={{
-                                        background: 'linear-gradient(90deg, var(--color-accent-violet), var(--color-accent-cyan))',
-                                    }}
-                                />
-
-                                <div className="p-6 space-y-5">
-                                    {/* Profile row */}
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className="w-14 h-14 rounded-md p-2 flex items-center justify-center text-2xl font-black"
-                                            style={{
-                                                background: 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))',
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: '#fff',
-                                            }}
-                                        >
-                                            <img src={jsLogo} alt=" Julietta Stanislaus" />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-sm" style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-text-primary)' }}>
-                                                {SITE_CONFIG.name}
-                                            </p>
-                                            <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                                                {SITE_CONFIG.role}
-                                            </p>
-                                        </div>
-                                        <div
-                                            className="ml-auto px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                                            style={{
-                                                background: 'rgba(139,92,246,0.15)',
-                                                color: 'var(--color-accent-violet)',
-                                                border: '1px solid rgba(139,92,246,0.2)',
-                                            }}
-                                        >
-                                            Open
-                                        </div>
-                                    </div>
-
-                                    {/* Skill bars */}
-                                    {[
-                                        { label: 'HTML5 / CSS3 / SCSS ', pct: 99, color: 'var(--color-accent-violet)' },
-                                        { label: 'JavaScript / jQuery', pct: 97, color: 'var(--color-accent-cyan)' },
-                                        { label: 'React / Tailwind CSS / Bootstrap / Angular', pct: 92, color: 'var(--color-tertiary)' },
-                                        { label: 'Figma → Code', pct: 95, color: 'var(--color-accent-violet)' }
-                                    ].map(({ label, pct, color }) => (
-                                        <div key={label} className="space-y-1">
-                                            <div className="flex justify-between text-xs"
-                                                style={{ color: 'var(--color-text-muted)', fontFamily: 'Inter' }}>
-                                                <span>{label}</span>
-                                                <span style={{ color }}>{pct}%</span>
-                                            </div>
-                                            <div
-                                                className="h-1.5 w-full rounded-full overflow-hidden"
-                                                style={{ background: 'rgba(255,255,255,0.06)' }}
-                                            >
-                                                <div
-                                                    className="h-full rounded-full"
-                                                    style={{
-                                                        width: started ? `${pct}%` : '0%',
-                                                        background: color,
-                                                        transition: 'width 1200ms var(--ease-out-expo)',
-                                                        boxShadow: `0 0 8px ${color}60`,
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
-
-                                    {/* Tag cloud */}
-                                    <div className="flex flex-wrap gap-2 pt-1">
-                                        {['React', 'SCSS', 'Figma', 'Tailwind', 'WordPress', 'WCAG'].map(tag => (
-                                            <span
-                                                key={tag}
-                                                className="px-3 py-1 rounded-full text-[11px] font-semibold"
-                                                style={{
-                                                    background: 'rgba(255,255,255,0.05)',
-                                                    color: 'var(--color-text-secondary)',
-                                                    border: '1px solid rgba(255,255,255,0.08)',
-                                                    fontFamily: 'Inter',
-                                                }}
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
+                            {HERO_PANEL_SHOW_IMG ? (
+                                <HeroImage />
+                            ) : (
+                                <HeroCard started={started} />
+                            )}
 
                             {/* Decorative glow behind card */}
                             <div
@@ -530,5 +437,170 @@ export default function Hero() {
   }
 `}</style>
         </section>
+    )
+}
+
+/* const HeroImage = () => {
+    const { isDark } = useTheme()
+
+    return (
+        <img
+            src={isDark ? dark_hero_panel : light_hero_panel}
+            alt="Hero"
+            className="w-full rounded-3xl h-full"
+        />
+    )
+} */
+
+const HeroImage = () => {
+    const { isDark } = useTheme()
+    const imgRef = useRef<HTMLImageElement>(null)
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const el = imgRef.current
+        if (!el) return
+        const { left, top, width, height } = el.getBoundingClientRect()
+        const x = ((e.clientX - left) / width) * 100
+        const y = ((e.clientY - top) / height) * 100
+        el.style.transformOrigin = `${x}% ${y}%`
+        el.style.transform = 'scale(1.5)'
+    }
+
+    const handleMouseLeave = () => {
+        const el = imgRef.current
+        if (!el) return
+        el.style.transform = 'scale(1)'
+        el.style.transformOrigin = 'center center'
+    }
+
+    return (
+        <div
+            className="relative w-full rounded-3xl overflow-hidden cursor-zoom-in"
+            style={{
+                boxShadow: isDark
+                    ? '0 32px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(139,92,246,0.15)'
+                    : '0 24px 48px rgba(139,92,246,0.15), 0 0 0 1px rgba(139,92,246,0.1)',
+                animation: 'floatY 6s ease-in-out infinite',
+            }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            <div
+                className="absolute inset-x-0 top-0 h-1 z-10"
+                style={{ background: 'linear-gradient(90deg, var(--color-accent-violet), var(--color-accent-cyan))' }}
+            />
+            <img
+                ref={imgRef}
+                src={isDark ? dark_hero_panel : light_hero_panel}
+                alt="Skills overview diagram"
+                className="w-full h-auto block"
+                style={{ transition: 'transform 200ms ease, transform-origin 200ms ease' }}
+            />
+        </div>
+    )
+}
+
+function HeroCard({ started }: any = false) {
+    /* Floating Card */
+    return (
+        <div
+            className="relative rounded-3xl overflow-hidden"
+            style={{
+                background: 'var(--color-surface-container)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 32px 64px rgba(0,0,0,0.4), 0 0 0 1px rgba(139,92,246,0.1)',
+                animation: 'floatY 6s ease-in-out infinite',
+            }}
+        >
+            {/* Top gradient bar */}
+            <div
+                className="h-1 w-full"
+                style={{
+                    background: 'linear-gradient(90deg, var(--color-accent-violet), var(--color-accent-cyan))',
+                }}
+            />
+
+            <div className="p-6 space-y-5">
+                {/* Profile row */}
+                <div className="flex items-center gap-4">
+                    <div
+                        className="w-14 h-14 rounded-md p-2 flex items-center justify-center text-2xl font-black"
+                        style={{
+                            background: 'linear-gradient(135deg, var(--color-accent-violet), var(--color-accent-cyan))',
+                            fontFamily: 'Plus Jakarta Sans',
+                            color: '#fff',
+                        }}
+                    >
+                        <img src={jsLogo} alt=" Julietta Stanislaus" />
+                    </div>
+                    <div>
+                        <p className="font-bold text-sm" style={{ fontFamily: 'Plus Jakarta Sans', color: 'var(--color-text-primary)' }}>
+                            {SITE_CONFIG.name}
+                        </p>
+                        <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
+                            {SITE_CONFIG.role}
+                        </p>
+                    </div>
+                    <div
+                        className="ml-auto px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                        style={{
+                            background: 'rgba(139,92,246,0.15)',
+                            color: 'var(--color-accent-violet)',
+                            border: '1px solid rgba(139,92,246,0.2)',
+                        }}
+                    >
+                        Open
+                    </div>
+                </div>
+
+                {/* Skill bars */}
+                {[
+                    { label: 'HTML5 / CSS3 / SCSS ', pct: 99, color: 'var(--color-accent-violet)' },
+                    { label: 'JavaScript / jQuery', pct: 97, color: 'var(--color-accent-cyan)' },
+                    { label: 'React / Tailwind CSS / Bootstrap / Angular', pct: 92, color: 'var(--color-tertiary)' },
+                    { label: 'Figma → Code', pct: 95, color: 'var(--color-accent-violet)' }
+                ].map(({ label, pct, color }) => (
+                    <div key={label} className="space-y-1">
+                        <div className="flex justify-between text-xs"
+                            style={{ color: 'var(--color-text-muted)', fontFamily: 'Inter' }}>
+                            <span>{label}</span>
+                            <span style={{ color }}>{pct}%</span>
+                        </div>
+                        <div
+                            className="h-1.5 w-full rounded-full overflow-hidden"
+                            style={{ background: 'rgba(255,255,255,0.06)' }}
+                        >
+                            <div
+                                className="h-full rounded-full"
+                                style={{
+                                    width: started ? `${pct}%` : '0%',
+                                    background: color,
+                                    transition: 'width 1200ms var(--ease-out-expo)',
+                                    boxShadow: `0 0 8px ${color}60`,
+                                }}
+                            />
+                        </div>
+                    </div>
+                ))}
+
+                {/* Tag cloud */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                    {['React', 'SCSS', 'Figma', 'Tailwind', 'WordPress', 'WCAG'].map(tag => (
+                        <span
+                            key={tag}
+                            className="px-3 py-1 rounded-full text-[11px] font-semibold"
+                            style={{
+                                background: 'rgba(255,255,255,0.05)',
+                                color: 'var(--color-text-secondary)',
+                                border: '1px solid rgba(255,255,255,0.08)',
+                                fontFamily: 'Inter',
+                            }}
+                        >
+                            {tag}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        </div>
     )
 }

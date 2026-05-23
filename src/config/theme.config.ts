@@ -21,6 +21,8 @@ type Project = {
     image_path: string;
 };
 
+export const HERO_PANEL_SHOW_IMG: boolean = true;
+
 
 export const SITE_CONFIG = {
     name: 'Julietta Stanislaus',
