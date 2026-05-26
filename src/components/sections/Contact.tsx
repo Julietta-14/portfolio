@@ -10,8 +10,7 @@ import {
 } from 'framer-motion'
 import { Mail, ShieldCheck, Send, RotateCcw, Check } from 'lucide-react'
 import { SITE_CONFIG } from '@/config/theme.config'
-import myImage from '../../assets/images/julietta-img-2.png'
-import contact from '../../assets/images/prime_send.svg'
+import myImage from '../../assets/images/julietta-img-2.jpeg'
 
 // ── Easing ─────────────────────────────────────────────────
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1]

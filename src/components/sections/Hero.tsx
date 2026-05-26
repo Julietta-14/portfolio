@@ -5,6 +5,7 @@ import jsLogo from '../../assets/images/JS-logo.svg'
 import rightArrow from '../../assets/images/right-arrow.svg'
 import dark_hero_panel from '../../assets/images/dk-panel.png';
 import light_hero_panel from '../../assets/images/lt-panel.png';
+import hero_panel from '../../assets/images/hero-panel.png';
 
 // ── Animated counter hook ──────────────────────────────────
 function useCounter(target: number, duration = 1500, start = false) {
@@ -351,7 +352,7 @@ export default function Hero() {
                     {/* ── RIGHT: Visual Card ── */}
                     <div
                         className="lg:col-span-5 flex justify-center lg:justify-end"
-                        style={reveal(200)}
+                        /* style={reveal(200)} */
                     >
                         <div className="relative w-full max-w-sm">
 
@@ -445,7 +446,7 @@ export default function Hero() {
 
     return (
         <img
-            src={isDark ? dark_hero_panel : light_hero_panel}
+            src={hero_panel}
             alt="Hero"
             className="w-full rounded-3xl h-full"
         />
@@ -460,8 +461,8 @@ const HeroImage = () => {
         const el = imgRef.current
         if (!el) return
         const { left, top, width, height } = el.getBoundingClientRect()
-        const x = ((e.clientX - left) / width) * 100
-        const y = ((e.clientY - top) / height) * 100
+        const x = ((e.clientX - left) / width) * 150
+        const y = ((e.clientY - top) / height) * 150
         el.style.transformOrigin = `${x}% ${y}%`
         el.style.transform = 'scale(1.5)'
     }
@@ -485,13 +486,13 @@ const HeroImage = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <div
+           <div
                 className="absolute inset-x-0 top-0 h-1 z-10"
                 style={{ background: 'linear-gradient(90deg, var(--color-accent-violet), var(--color-accent-cyan))' }}
             />
             <img
                 ref={imgRef}
-                src={isDark ? dark_hero_panel : light_hero_panel}
+                src={hero_panel}/* {isDark ? dark_hero_panel : light_hero_panel} */
                 alt="Skills overview diagram"
                 className="w-full h-auto block"
                 style={{ transition: 'transform 200ms ease, transform-origin 200ms ease' }}
