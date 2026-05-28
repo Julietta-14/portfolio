@@ -267,7 +267,7 @@ export default function Footer() {
 
     return (
         <>
-            <ScrollToTop />
+            {/* <ScrollToTop /> */}
 
             <footer
                 ref={footerRef}

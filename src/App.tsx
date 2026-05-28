@@ -2,14 +2,15 @@ import { Suspense, lazy } from 'react'
 import { ThemeProvider } from '@/context/ThemeContext'
 import CustomCursor from '@/components/ui/CustomCursor'
 import PageTransition from '@/components/ui/PageTransition'
-import ScrollProgress      from '@/components/ui/ScrollProgress'
+import ScrollProgress from '@/components/ui/ScrollProgress'
+import ChatbotWidget from './components/sections/ChatbotWidget'
 
 // Sections (will build these next)
 const Navbar = lazy(() => import('@/components/sections/Navbar'))
 const Hero = lazy(() => import('@/components/sections/Hero'))
 const Skills = lazy(() => import('@/components/sections/Skills'))
 const Projects = lazy(() => import('@/components/sections/Projects'))
-const Stats    = lazy(() => import('@/components/sections/Stats'))
+const Stats = lazy(() => import('@/components/sections/Stats'))
 const Timeline = lazy(() => import('@/components/sections/Timeline'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 const Footer = lazy(() => import('@/components/sections/Footer'))
@@ -68,13 +69,13 @@ export default function App() {
             <Projects />
           </Suspense>
 
-         
+
 
           <Suspense fallback={<SectionFallback />}>
             <Timeline />
           </Suspense>
 
-           <Suspense fallback={<SectionFallback />}>
+          <Suspense fallback={<SectionFallback />}>
             <Stats />
           </Suspense>
 
@@ -86,6 +87,11 @@ export default function App() {
         {/* Footer */}
         <Suspense fallback={null}>
           <Footer />
+        </Suspense>
+
+        {/* ─── Chatbot Widget: floats above everything ─── */}
+        <Suspense fallback={null}>
+          <ChatbotWidget />
         </Suspense>
 
       </div>
