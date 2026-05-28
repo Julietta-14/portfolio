@@ -5,7 +5,7 @@ import jsLogo from '../../assets/images/JS-logo.svg'
 import rightArrow from '../../assets/images/right-arrow.svg'
 import dark_hero_panel from '../../assets/images/dk-panel.png';
 import light_hero_panel from '../../assets/images/lt-panel.png';
-import hero_panel from '../../assets/images/hero-panel.png';
+/* import hero_panel from '../../assets/images/hero-panel.png'; */
 
 // ── Animated counter hook ──────────────────────────────────
 function useCounter(target: number, duration = 1500, start = false) {
@@ -492,7 +492,7 @@ const HeroImage = () => {
             />
             <img
                 ref={imgRef}
-                src={hero_panel}/* {isDark ? dark_hero_panel : light_hero_panel} */
+                src={isDark ? dark_hero_panel : light_hero_panel}
                 alt="Skills overview diagram"
                 className="w-full h-auto block"
                 style={{ transition: 'transform 200ms ease, transform-origin 200ms ease' }}
