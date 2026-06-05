@@ -236,3 +236,132 @@ export const EXTRA_SKILLS = [
     'Core Web Vitals',
     'Component Architecture',
 ] as const
+
+
+export const filters = ['All', 'Frontend', 'UI/UX', 'React', 'Angular', 'Wordpress'];
+
+export const featured = {
+    id: 1,
+    number: '01',
+    category: 'FRONTEND',
+    title: 'Shipment Dashboard - React',
+    subtitle: 'Precision Navigator',
+    description: 'Developed the end-to-end UI/UX and fully functional frontend for a comprehensive shipping and logistics dashboard application built with React. Specialized in translating high-fidelity designs into interactive, production-ready components, custom layouts, and a conversion-focused user interface.',
+    image:
+        '/portfolio/shipment_dash_banner.png',
+    location: 'Joshua Tree, CA',
+    year: '2026',
+    tags: [
+        { label: 'React', color: 'amber' },
+        { label: 'Tailwind', color: 'blue' },
+        { label: 'TypeScript', color: 'amber' },
+        { label: 'Vite', color: 'purple' },
+    ],
+    stats: [
+        { value: '98', label: 'PERF SCORE' },
+        { value: '1.2s', label: 'LOAD TIME' },
+        { value: '100', label: 'ACCESSIBILITY' },
+    ],
+    status: 'Live',
+    link: 'https://shipment-julietta-uiux.netlify.app/',
+    badge: 'Featured',
+    filters: ['Frontend'],
+};
+
+export const projects = [
+    {
+        id: 2,
+        number: '02',
+        category: 'UI/UX',
+        title: 'Monolith',
+        description: 'A high-fidelity monolithic landing page crafted for a enterprise client, designed to deliver a visually immersive, scroll-driven experience with strong narrative flow, performance optimization, and responsive static architecture using HTML, CSS, and JavaScript.',
+        image: '/portfolio/monolith_banner.png',
+        year: '2026',
+        tags: [
+            { label: 'Figma', color: 'pink' },
+            { label: 'CSS', color: 'blue' },
+            { label: 'JavaScript', color: 'blue' },
+            { label: 'Boostrap', color: 'blue' },
+        ],
+        status: 'Live',
+        role: 'Associate Developer',
+        responsiblity: '',
+        link: 'https://julietta-monolith.netlify.app/',
+        filters: ['UI/UX'],
+    },
+    {
+        id: 3,
+        number: '03',
+        category: 'React',
+        title: 'Digital Interaction Platform',
+        description: 'A dynamic, interaction-rich web platform built with React and TypeScript, featuring intuitive drag-and-drop list management. Designed with a focus on reusable component architecture and state-driven UI behavior for a smooth, consistent experience across all devices.',
+        image: '/portfolio/nda-image.png',
+        year: '2024',
+        tags: [
+            { label: 'React', color: 'teal' },
+            { label: 'TypeScript', color: 'blue' },
+            { label: 'Tailwind', color: 'blue' },
+            { label: 'Vite', color: 'blue' },
+        ],
+        status: 'NDA',
+        role: 'Associate Developer',
+        responsiblity: '',
+        link: '#',
+        filters: ['Frontend', 'React'],
+    },
+    {
+        id: 4,
+        number: '04',
+        category: 'Frontend',
+        title: 'Multi-Client Web Development Portfolio',
+        description: 'End-to-end delivery of 15-20+ client websites spanning corporate, service, and portfolio industries — from UI/UX design through deployment and ongoing maintenance. Built with reusable design patterns and scalable page structures to accelerate delivery without compromising quality.',
+        image: '/portfolio/nda-image.png',
+        year: '2018-2020',
+        tags: [
+            { label: 'HTML5', color: 'amber' },
+            { label: 'CSS', color: 'blue' },
+        ],
+        status: 'NDA',
+        role: 'Associate Developer',
+        responsiblity: '',
+        link: '#',
+        filters: ['Frontend'],
+    },
+    {
+        id: 5,
+        number: '05',
+        category: 'Wordpress',
+        title: 'Enterprise Dashboard Design System',
+        description: 'Designed a scalable design system and user experience framework for enterprise web applications, including dashboards, analytics modules, user management, and workflow automation. Established reusable components, accessibility standards, and responsive layouts to ensure consistency across multiple products.',
+        image: '/portfolio/nda-image.png',
+        year: '2023-2024',
+        tags: [
+            { label: 'HTML5', color: 'amber' },
+            { label: 'CSS', color: 'blue' },
+        ],
+        status: 'NDA',
+        role: 'Associate Developer',
+        responsiblity: '',
+        link: '#',
+        filters: ['Wordpress'],
+    },
+    {
+        id: 6,
+        number: '06',
+        category: 'Angular',
+        title: 'Enterprise Workflow Management Platform',
+        description: 'Developed a feature-rich enterprise application to streamline internal workflows, approvals, task tracking, and reporting processes. Built reusable Angular components, modular architecture, and responsive interfaces while integrating with multiple backend services and role-based access controls.',
+        image: '/portfolio/nda-image.png',
+        year: '2018-2020',
+        tags: [
+            { label: 'TypeScript', color: 'blue' },
+            { label: 'RxJS', color: 'purple' }
+        ],
+        status: 'NDA',
+        role: 'Associate Developer',
+        responsiblity: '',
+        link: '#',
+        filters: ['Angular'],
+    },
+
+];

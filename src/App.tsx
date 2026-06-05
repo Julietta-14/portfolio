@@ -14,6 +14,7 @@ const Stats = lazy(() => import('@/components/sections/Stats'))
 const Timeline = lazy(() => import('@/components/sections/Timeline'))
 const Contact = lazy(() => import('@/components/sections/Contact'))
 const Footer = lazy(() => import('@/components/sections/Footer'))
+const ProjectsSection = lazy(() => import('@/components/sections/ProjectsSection'))
 
 function SectionFallback() {
   return (
@@ -65,10 +66,14 @@ export default function App() {
             <Skills />
           </Suspense>
 
-          <Suspense fallback={<SectionFallback />}>
+          {/* <Suspense fallback={<SectionFallback />}>
             <Projects />
-          </Suspense>
+          </Suspense> 8*/}
 
+           <Suspense fallback={<SectionFallback />}>
+            <ProjectsSection />
+           </Suspense>
+             
 
 
           <Suspense fallback={<SectionFallback />}>
