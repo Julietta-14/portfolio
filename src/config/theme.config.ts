@@ -265,7 +265,7 @@ export const featured = {
     status: 'Live',
     link: 'https://shipment-julietta-uiux.netlify.app/',
     badge: 'Featured',
-    filters: ['Frontend'],
+    filters: ['Frontend', 'React'],
 };
 
 export const projects = [
