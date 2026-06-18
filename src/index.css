@@ -414,6 +414,41 @@ body {
   max-width: 32px;
   width: 100%;
 }
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+.cursor-ring {
+  transition:
+    width  180ms var(--ease-spring),
+    height 180ms var(--ease-spring),
+    border-color 180ms ease,
+    opacity 200ms ease;
+}
+.cursor-ring.cursor-hovered {
+  width:  52px !important;
+  height: 52px !important;
+  border-color: var(--color-accent-violet) !important;
+}
+.cursor-dot {
+  transition: width 100ms ease, height 100ms ease;
+}
+.cursor-dot.cursor-clicked {
+  width:  5px !important;
+  height: 5px !important;
+}
+.cursor-ring.cursor-clicked {
+  width:  28px !important;
+  height: 28px !important;
+  border-color: var(--color-accent-cyan) !important;
+  opacity: 0.7;
+}
+
+/* Appreciation card hover — CSS-only, GPU composited, zero JS re-render */
+.appr-card:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 20px 52px rgba(139,92,246,0.22), 0 0 0 1px rgba(139,92,246,0.35) !important;
+}
 span:not(.title-journey span):not(.submit-btn span):not(h2 span) {
   display: inline-block;
   vertical-align: middle;

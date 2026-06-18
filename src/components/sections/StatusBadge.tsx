@@ -1,4 +1,4 @@
-export default function StatusBadge({ status }) {
+export default function StatusBadge({ status }: any) {
   const styles =
     status === 'Live'
       ? 'bg-emerald-50 text-emerald-800'

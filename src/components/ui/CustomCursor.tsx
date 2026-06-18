@@ -1,91 +1,112 @@
-import { useEffect, useRef, useState } from 'react'
-import { useMousePosition } from '@/hooks/useMousePosition'
+import { useEffect, useRef } from 'react'
 
 export default function CustomCursor() {
-    const { x, y } = useMousePosition()
-    const dotRef = useRef<HTMLDivElement>(null)
-    const ringRef = useRef<HTMLDivElement>(null)
-    const [hovered, setHovered] = useState(false)
-    const [clicked, setClicked] = useState(false)
+  const dotRef  = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
+  const mouse   = useRef({ x: -100, y: -100 })
+  const ring    = useRef({ x: -100, y: -100 })
 
-    // Smooth ring with lerp via rAF
-    useEffect(() => {
-        let rx = x, ry = y
-        let raf: number
+  // Single rAF loop — starts once, never restarts
+  useEffect(() => {
+    let raf: number
+    const loop = () => {
+      ring.current.x += (mouse.current.x - ring.current.x) * 0.18
+      ring.current.y += (mouse.current.y - ring.current.y) * 0.18
+      if (ringRef.current) {
+        ringRef.current.style.transform =
+          `translate(${ring.current.x - 20}px, ${ring.current.y - 20}px)`
+      }
+      raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf)
+  }, []) // ← empty: never re-runs, loop lives for the component lifetime
 
-        const loop = () => {
-            rx += (x - rx) * 0.12
-            ry += (y - ry) * 0.12
-            if (ringRef.current) {
-                ringRef.current.style.transform =
-                    `translate(${rx - 20}px, ${ry - 20}px)`
-            }
-            raf = requestAnimationFrame(loop)
-        }
-        raf = requestAnimationFrame(loop)
-        return () => cancelAnimationFrame(raf)
-    }, [x, y])
+  // Mousemove — update dot instantly via DOM, store position for ring lerp
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      mouse.current.x = e.clientX
+      mouse.current.y = e.clientY
+      if (dotRef.current) {
+        dotRef.current.style.transform =
+          `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`
+      }
+    }
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
 
-    // Detect hoverable elements
-    useEffect(() => {
-        const enter = () => setHovered(true)
-        const leave = () => setHovered(false)
-        const down = () => setClicked(true)
-        const up = () => setClicked(false)
+  // Hover / click — event delegation, works for lazily-rendered elements too
+  useEffect(() => {
+    const SELECTORS = 'a, button, [data-cursor="hover"], input, textarea, select, label'
 
-        const targets = document.querySelectorAll(
-            'a, button, [data-cursor="hover"], input, textarea'
-        )
-        targets.forEach(el => {
-            el.addEventListener('mouseenter', enter)
-            el.addEventListener('mouseleave', leave)
-        })
-        window.addEventListener('mousedown', down)
-        window.addEventListener('mouseup', up)
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as Element).closest(SELECTORS)) {
+        ringRef.current?.classList.add('cursor-hovered')
+      }
+    }
+    const onOut = (e: MouseEvent) => {
+      if ((e.target as Element).closest(SELECTORS)) {
+        ringRef.current?.classList.remove('cursor-hovered')
+      }
+    }
+    const onDown = () => {
+      dotRef.current?.classList.add('cursor-clicked')
+      ringRef.current?.classList.add('cursor-clicked')
+    }
+    const onUp = () => {
+      dotRef.current?.classList.remove('cursor-clicked')
+      ringRef.current?.classList.remove('cursor-clicked')
+    }
 
-        return () => {
-            targets.forEach(el => {
-                el.removeEventListener('mouseenter', enter)
-                el.removeEventListener('mouseleave', leave)
-            })
-            window.removeEventListener('mousedown', down)
-            window.removeEventListener('mouseup', up)
-        }
-    }, [])
+    document.addEventListener('mouseover',  onOver,  { passive: true })
+    document.addEventListener('mouseout',   onOut,   { passive: true })
+    window.addEventListener  ('mousedown',  onDown)
+    window.addEventListener  ('mouseup',    onUp)
 
-    // Hide on mobile
-    if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)
-        return null
+    return () => {
+      document.removeEventListener('mouseover',  onOver)
+      document.removeEventListener('mouseout',   onOut)
+      window.removeEventListener  ('mousedown',  onDown)
+      window.removeEventListener  ('mouseup',    onUp)
+    }
+  }, [])
 
-    return (
-        <>
-            {/* Dot — snaps instantly */}
-            <div
-                ref={dotRef}
-                className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
-                style={{
-                    transform: `translate(${x - 4}px, ${y - 4}px)`,
-                    width: clicked ? 6 : 8,
-                    height: clicked ? 6 : 8,
-                    borderRadius: '50%',
-                    background: '#fff',
-                    transition: 'width 150ms, height 150ms',
-                }}
-            />
+  // Skip on touch devices
+  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)
+    return null
 
-            {/* Ring — lags behind with lerp */}
-            <div
-                ref={ringRef}
-                className="fixed top-0 left-0 pointer-events-none z-9998"
-                style={{
-                    width: hovered ? 48 : 40,
-                    height: hovered ? 48 : 40,
-                    borderRadius: '50%',
-                    border: `1.5px solid ${hovered ? 'var(--color-accent-violet)' : 'rgba(255,255,255,0.5)'}`,
-                    transition: 'width 200ms var(--ease-spring), height 200ms var(--ease-spring), border-color 200ms',
-                    willChange: 'transform',
-                }}
-            />
-        </>
-    )
+  return (
+    <>
+      {/* Dot — tracks mouse instantly, no delay */}
+      <div
+        ref={dotRef}
+        className="cursor-dot fixed top-0 left-0 pointer-events-none"
+        style={{
+          zIndex: 9999,
+          width: 8,
+          height: 8,
+          borderRadius: '50%',
+          background: '#fff',
+          mixBlendMode: 'difference',
+          transform: 'translate(-100px, -100px)',
+        }}
+      />
+
+      {/* Ring — lerps behind dot */}
+      <div
+        ref={ringRef}
+        className="cursor-ring fixed top-0 left-0 pointer-events-none"
+        style={{
+          zIndex: 9998,
+          width: 40,
+          height: 40,
+          borderRadius: '50%',
+          border: '1.5px solid rgba(255,255,255,0.45)',
+          willChange: 'transform',
+          transform: 'translate(-100px, -100px)',
+        }}
+      />
+    </>
+  )
 }

@@ -6,7 +6,12 @@ const colorMap = {
   pink: 'bg-pink-50 text-pink-800',
 };
 
-export default function Tag({ label, color = 'amber' }) {
+type TagProps = {
+  label: string;
+  color?: keyof typeof colorMap;
+};
+
+export default function Tag({ label, color = 'amber' }: TagProps) {
   return (
     <span
       className={`text-[10px] font-medium px-2.5 py-1 rounded-full tracking-wide ${colorMap[color]}`}
