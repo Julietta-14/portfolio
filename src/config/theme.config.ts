@@ -164,7 +164,7 @@ export const SKILLS = [
 export const TIMELINE = [
     {
         period: '2024 - Present',
-        role: 'Account Manager - UI/UX Solutions',
+        role: 'Lead UI/UX Developer',
         company: 'Vinsinfo, Chennai',
         current: true,
         description: 'Architected scalable front-end systems and reusable component libraries for enterprise and e-commerce platforms. Led end-to-end UI development using React, guiding teams from Figma designs to pixel-perfect implementation. Implemented WCAG 2.1 standards and mentored UI developers.',
